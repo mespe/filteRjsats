@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r choose a directory and generate a list of files}
+```{r choose a directory and generate a list of files, echo=TRUE}
 # Choose a Directory 
 path <- choose.dir()
 
@@ -22,7 +22,7 @@ path <- choose.dir()
 file <- list.files(path = path, recursive = TRUE)
 ```
 
-```{r assign timezone}
+```{r assign timezone, echo=TRUE}
 # Get a list of Time Zones
 OlsonNames()
 
@@ -30,7 +30,7 @@ OlsonNames()
 timezone <- "America/Los_Angeles"
 ```
 
-```{r read a directory of raw jsats detection files}
+```{r read a directory of raw jsats detection files, echo=TRUE}
 # Empty list to store dataframes
 det_list <- list()
 
@@ -41,12 +41,12 @@ det_list[[i]] <- jsats_file
 }
 ```
 
-```{r get a list of reference tags}
+```{r get a list of reference tags, echo=TRUE}
 #Get a list of reference tags
 reference_tags <- get_reference_tags()
 ```
 
-```{r apply the prefilter to a list of raw detection files}
+```{r apply the prefilter to a list of raw detection files, echo=TRUE}
 # Empty list to store dataframes
 pref_list <- list()
 
@@ -57,7 +57,7 @@ pref_list[[i]] <- prefilter_file
 }
 ```
 
-```{r get fish data}
+```{r get fish data, echo=TRUE}
 # View all the fish fields
 get_fish_fields()
 
@@ -74,7 +74,7 @@ get_fish_fields()
 fish <- get_tagged_fish()
 ```
 
-```{r join fish data to detection dataframe}
+```{r join fish data to detection dataframe, echo=TRUE}
 # Empty list to store dataframes
 fish_list <- list()
 
@@ -85,7 +85,7 @@ fish_list[[i]] <- fish_file
 }
 ```
 
-```{r apply the final filter}
+```{r apply the final filter, echo=TRUE}
 # Empty list to store dataframes
 final_list <- list()
 
@@ -96,7 +96,7 @@ final_list[[i]] <- final_filter
 }
 ```
 
-```{r get receiver data}
+```{r get receiver data, echo=TRUE}
 # View all the receiver metadta fields
 get_rcvr_fields()
 
