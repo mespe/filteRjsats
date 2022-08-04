@@ -14,6 +14,106 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(filteRjsats)
+```{r choose a directory and generate a list of files}
+# Choose a Directory 
+path <- choose.dir()
+
+# List Files in Directory
+file <- list.files(path = path, recursive = TRUE)
+```
+
+```{r assign timezone}
+# Get a list of Time Zones
+OlsonNames()
+
+# Set Time Zone
+timezone <- "America/Los_Angeles"
+```
+
+```{r read a directory of raw jsats detection files}
+# Empty list to store dataframes
+det_list <- list()
+
+# Process each file in the list of files
+for(i in 1:length(file)){
+jsats_file <- read_jsats(path, file[i])
+det_list[[i]] <- jsats_file
+}
+```
+
+```{r get a list of reference tags}
+#Get a list of reference tags
+reference_tags <- get_reference_tags()
+```
+
+```{r apply the prefilter to a list of raw detection files}
+# Empty list to store dataframes
+pref_list <- list()
+
+# Apply prefilter
+for(i in 1:length(det_list)){
+prefilter_file <- prefilter(det_list[[i]], reference_tags)
+pref_list[[i]] <- prefilter_file
+}
+```
+
+```{r get fish data}
+# View all the fish fields
+get_fish_fields()
+
+# NOT RUN
+# Choose important fields if don't want all fields, shown are the minimum
+# important_fields <- c("fish_type","tag_id_hex",
+#                       "fish_release_date", "release_location",
+#                       "release_latitude", "release_longitude",
+#                       "tag_pulse_rate_interval_nominal",
+#                       "tag_warranty_life", "fish_length_type",
+#                       "fish_length","fish_weight")
+
+# Query ERDAPP for all tagged fish
+fish <- get_tagged_fish()
+```
+
+```{r join fish data to detection dataframe}
+# Empty list to store dataframes
+fish_list <- list()
+
+# Join fish data to detection and filter based on release date and battery
+for(i in 1:length(pref_list)){
+fish_file <- add_fish(pref_list[[i]], fish)
+fish_list[[i]] <- fish_file
+}
+```
+
+```{r apply the final filter}
+# Empty list to store dataframes
+final_list <- list()
+
+# Apply the final filter
+for(i in 1:length(fish_list)){
+final_filter <- second_filter(fish_list[[i]])
+final_list[[i]] <- final_filter
+}
+```
+
+```{r get receiver data}
+# View all the receiver metadta fields
+get_rcvr_fields()
+
+# NOT RUN
+# # Choose important fields if don't want all fields, shown are the minimum
+# rcvr_fields <- c("dep_id","receiver_serial_number","latitude","longitude",
+#                  "receiver_location","receiver_river_km",
+#                  "receiver_general_location","receiver_general_river_km",
+#                  "receiver_beacon_id_hex", "receiver_start",
+#                  "receiver_end")
+
+#Get the receiver metadata
+rcvrs <- get_rcvr_data()
+
+#Join the receiver metadata to the filtered detections
+for(i in 1:length(final_list)){
+  out <- join_rcvr_data(final_filter, rcvr_data)
+  final_list[[i]]
+}
 ```
