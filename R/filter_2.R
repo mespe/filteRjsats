@@ -1,3 +1,14 @@
+#' Add Fish Data from ERDAPP to a Detection Dataframe
+#'
+#' This function takes a prefiltered detection dataframe from prefilter() and
+#' joins it to fish data downloaded from ERDAPP using the get_fish_data()
+#' function. Detections are then filtered durther based on the date and time of
+#' tag release and expected battery life. Detections occuring before release of
+#' the tag or after 2x the expected battery life are removed.
+#'
+#' @param prefilter_file a prefiltered detection dataframe from prefilter()
+#' @param fish a dataframe of fish data rectrieved from get_fish_data()
+#' @return A filtered dataframe converting the raw detection data into rows of detections
 #' @export
 add_fish <- function(prefilter_file, fish){
   fish_tmp <- fish[fish$fish_release_date > (min(prefilter_file$DateTime_Local)-lubridate::days(200)),]
