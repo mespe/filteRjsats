@@ -1,3 +1,4 @@
+#' @export
 add_fish <- function(prefilter_file, fish){
   fish_tmp <- fish[fish$fish_release_date > (min(prefilter_file$DateTime_Local)-lubridate::days(200)),]
   prefilter_file$TagInFile = prefilter_file$Tag_Hex %in% fish_tmp$Tag_Hex #Check for Study Tags

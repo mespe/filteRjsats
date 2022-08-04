@@ -1,3 +1,4 @@
+#' @export
 prefilter <- function(jsats_file, reference_tags){
   temp <- jsats_file
   temp <- dplyr::arrange(.data = temp,H)

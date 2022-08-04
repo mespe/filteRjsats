@@ -1,3 +1,4 @@
+#' @export
 get_receiver_type <- function(file_list){
   receiver_type_list <- data.frame(file_name = rep(NA, length(file_list)),
                                    Name = rep(NA, length(file_list)),
@@ -15,6 +16,7 @@ get_receiver_type <- function(file_list){
   receiver_type_list
 }
 
+#' @export
 read_lotek <- function(path, file, timezone){
   LOT = read.csv(file.path(path,file),
                  colClasses = c(character(),
@@ -35,6 +37,7 @@ read_lotek <- function(path, file, timezone){
   LOT
 }
 
+#' @export
 read_tekno <- function(path, file, timezone){
 
   TEK <- read.csv(file.path(path,file),
@@ -59,6 +62,7 @@ read_tekno <- function(path, file, timezone){
 
 }
 
+#' @export
 read_ats <- function(path, file, timezone){
   ATS <- data.frame(read.delim(file = file.path(path,file),
                                skip = 0))
@@ -101,6 +105,7 @@ read_ats <- function(path, file, timezone){
   ATS
 }
 
+#' @export
 read_jsats <- function(path, file, timezone){
   # file_name <- stringr::str_split(file, pattern = '\\.')[[1]][1]
   file_type <- ifelse(stringr::str_detect(file,'L'),

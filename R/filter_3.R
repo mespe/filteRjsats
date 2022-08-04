@@ -1,3 +1,4 @@
+#' @export
 second_filter_lotek <- function(fish_file){
   filtered <- fish_file
   filtered <- dplyr::group_by(.data = filtered, Tag_Hex)
@@ -44,6 +45,7 @@ second_filter_lotek <- function(fish_file){
   filtered
 }
 
+#' @export
 second_filter_tekno <- function(fish_file){
   filtered <- fish_file
   filtered$pr_nom <- as.numeric(filtered$tag_pulse_rate_interval_nominal)
@@ -100,6 +102,7 @@ second_filter_tekno <- function(fish_file){
   filtered
 }
 
+#' @export
 second_filter_ats <- function(fish_file){
   filtered <- fish_file
   filtered$pr_nom <- as.numeric(filtered$tag_pulse_rate_interval_nominal)
@@ -155,6 +158,7 @@ second_filter_ats <- function(fish_file){
   filtered
 }
 
+#' @export
 second_filter <- function(fish_file){
 
   if (fish_file$Make[1] == "Lotek") final_file <- second_filter_lotek(fish_file)

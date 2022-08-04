@@ -1,3 +1,4 @@
+#' @export
 register_parallel <- function(files){
   cl <- snow::makeCluster(parallel::detectCores()-2, "SOCK")
   doSNOW::registerDoSNOW(cl)

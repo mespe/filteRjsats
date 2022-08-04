@@ -1,3 +1,4 @@
+#' @export
 get_reference_tags <- function(){
   if (!requireNamespace("pkg", quietly = TRUE)) {
     stop(
@@ -13,6 +14,7 @@ get_reference_tags <- function(){
   reference_tags$receiver_beacon_id_hex
 }
 
+#' @export
 get_fish_fields <- function(){
   if (!requireNamespace("pkg", quietly = TRUE)) {
     stop(
@@ -25,6 +27,7 @@ get_fish_fields <- function(){
   info$variables
 }
 
+#' @export
 get_tagged_fish <- function(important_fields = NULL){
   if (!requireNamespace("pkg", quietly = TRUE)) {
     stop(
@@ -54,6 +57,7 @@ get_tagged_fish <- function(important_fields = NULL){
   as.data.frame(fish)
 }
 
+#' @export
 get_rcvr_fields <- function(){
   if (!requireNamespace("pkg", quietly = TRUE)) {
     stop(
@@ -66,6 +70,7 @@ get_rcvr_fields <- function(){
   info$variables
 }
 
+#' @export
 rcvr_fields = c("dep_id",
                 "receiver_serial_number",
                 "latitude",
@@ -78,6 +83,7 @@ rcvr_fields = c("dep_id",
                 "receiver_start",
                 "receiver_end")
 
+#' @export
 get_rcvr_data <- function(fields = NULL){
   if (!requireNamespace("pkg", quietly = TRUE)) {
     stop(
