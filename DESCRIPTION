@@ -3,8 +3,8 @@ Title: Filter Raw JSATS Acoustic Telemetry Files from Lotek, ATS, Teknologic
 Version: 0.0.0.9000
 Authors@R: c(
     person("Taylor", "Spaulding", , "tspaulding@esassoc.com", 
-    role = c("aut", "cre"), comment = c(ORCID = "0000-0003-4381-5296"))
-    person("Arnold", "Ammann", , "arnold.ammann@noaa.gov", role = c("aut"))
+    role = c("aut", "cre"), comment = c(ORCID = "0000-0003-4381-5296")),
+    person("Arnold", "Ammann", , "arnold.ammann@noaa.gov", role = c("aut")),
     person("Travis", "Hinkelman", , "thinkelman@esassoc.com", role = c("ctb")))
 Description: A package for the filtering of raw acoustic telemetry transmissions
     from three acoustic telemetry companies (ATS, Lotek, Teknologic). The 
