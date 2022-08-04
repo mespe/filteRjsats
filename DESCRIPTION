@@ -26,3 +26,6 @@ Imports:
     tidyr
 Suggests: 
     rerddap
+Depends: 
+    R (>= 2.10)
+LazyData: true
