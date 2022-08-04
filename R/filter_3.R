@@ -1,3 +1,16 @@
+#' Four Hit Filter for Lotek Detections
+#'
+#' This function takes a Lotek detection dataframe generated from the add_fish()
+#' function and filters it a second time to remove any remaining multipath
+#' detections, and then check the remaining detections by comparing the time
+#' between detections, for a rolling window of 4 detections to ensure it is less
+#' 16.6x the stated pulse rate interval. It additionally checks that all
+#' detections within the window occur within 20% of the pulse rate interval of
+#' the other detections and that the standard deviation of pulse rate intervals
+#' is less than 0.025. Called by second_filter().
+#'
+#' @param fish_file a dataframe of detections retrieved from add_fish()
+#' @return A dataframe which has been filtered to remove false positives
 #' @export
 second_filter_lotek <- function(fish_file){
   filtered <- fish_file
@@ -45,6 +58,19 @@ second_filter_lotek <- function(fish_file){
   filtered
 }
 
+#' Two Hit Filter for Teknologic Detections
+#'
+#' This function takes a Teknologic detection dataframe generated from the
+#' add_fish() function and filters it a second time to remove any remaining
+#' multipath detections, and then check the remaining detections by comparing
+#' the time between each detection to ensure it is less 4x the stated pulse rate
+#' interval. It additionally checks that all detections have a frequency
+#' between 390 and 445 kHz and that the frequency of all detections are within
+#' 55kHz of each other. Called by second_filter().
+#'
+#'
+#' @param fish_file a dataframe of detections retrieved from add_fish()
+#' @return A dataframe which has been filtered to remove false positives
 #' @export
 second_filter_tekno <- function(fish_file){
   filtered <- fish_file
@@ -102,6 +128,19 @@ second_filter_tekno <- function(fish_file){
   filtered
 }
 
+#' Two Hit Filter for ATS Detections
+#'
+#' This function takes an ATS detection dataframe generated from the
+#' add_fish() function and filters it a second time to remove any remaining
+#' multipath detections, and then check the remaining detections by comparing
+#' the time between each detection to ensure it is less 4x the stated pulse rate
+#' interval. It additionally checks that all detections have a frequency
+#' between 416.3 and 418.75 kHz and that the frequency of all detections are within
+#' 0.505kHz of each other. Called by second_filter().
+#'
+#'
+#' @param fish_file a dataframe of detections retrieved from add_fish()
+#' @return A dataframe which has been filtered to remove false positives
 #' @export
 second_filter_ats <- function(fish_file){
   filtered <- fish_file
@@ -158,12 +197,26 @@ second_filter_ats <- function(fish_file){
   filtered
 }
 
+#' Two or Four Hit Filter for Any Detection File
+#'
+#' This function takes any acoustic receiver detection dataframe generated from
+#' the add_fish() function and filters it a second time to remove any remaining
+#' multipath detections. Then depending on the type of receiver file applies an
+#' algorithm to assess and filter all remaining detections.
+#'
+#'
+#' @param fish_file a dataframe of detections retrieved from add_fish()
+#' @return A dataframe which has been filtered to remove false positives
 #' @export
 second_filter <- function(fish_file){
 
-  if (fish_file$Make[1] == "Lotek") final_file <- second_filter_lotek(fish_file)
-  if (fish_file$Make[1] == "Tekno") final_file <- second_filter_tekno(fish_file)
-  if (fish_file$Make[1] == "ATS") final_file <- second_filter_ats(fish_file)
+  ifelse(fish_file$Make[1] == "Lotek",
+         final_file <- second_filter_lotek(fish_file),
+         ifelse(fish_file$Make[1] == "Tekno",
+                final_file <- second_filter_tekno(fish_file),
+                ifelse(fish_file$Make[1] == "ATS",
+                       final_file <- second_filter_ats(fish_file),
+                       print("No Detections"))))
 
   message(paste0("Number of Valid Tag IDs: ", length(unique(final_file$Tag_Hex))))
   message(paste0("Number of Valid Detections: ", length(final_file$DateTime_Local)))
