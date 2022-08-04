@@ -1,3 +1,10 @@
+#' Get A List of Reference (Beacon) Tags from ERDAPP
+#'
+#' This function searches the California Fish Tracking ERDAPP Database to create
+#' a list of beacon tag hexadecimal IDs. Used in the prefilter to separate
+#' beacon tags from tagged fish.
+#'
+#' @return A vector of beacon tags hexadecimal IDs
 #' @export
 get_reference_tags <- function(){
   if (!requireNamespace("pkg", quietly = TRUE)) {
@@ -14,6 +21,13 @@ get_reference_tags <- function(){
   reference_tags$receiver_beacon_id_hex
 }
 
+#' Get A List of Fish Related Fields from ERDAPP
+#'
+#' This function searches the California Fish Tracking ERDAPP Database to create
+#' a list of all potential fields related to fish metrics. Used to identify
+#' important fish data fields to add to detection data in the add_fish function.
+#'
+#' @return A vector of potential fish fields which the user may review
 #' @export
 get_fish_fields <- function(){
   if (!requireNamespace("pkg", quietly = TRUE)) {
@@ -27,6 +41,14 @@ get_fish_fields <- function(){
   info$variables
 }
 
+#' Get A Dataframe of All Tagged fish from CalFishTrack
+#'
+#' This function searches the California Fish Tracking ERDAPP Database to create
+#' a dataframe of tagged fish data. Desired fields can be set to select only
+#' certain fields. This data is used to add fish data to detection data in the
+#' add_fish function.
+#'
+#' @return A dataframe of fish data which can be joined to detection data
 #' @export
 get_tagged_fish <- function(important_fields = NULL){
   if (!requireNamespace("pkg", quietly = TRUE)) {
@@ -57,6 +79,14 @@ get_tagged_fish <- function(important_fields = NULL){
   as.data.frame(fish)
 }
 
+#' Get A List of Receiver Related Fields from ERDAPP
+#'
+#' This function searches the California Fish Tracking ERDAPP Database to create
+#' a list of all potential fields related to acoustic receiver metadata.
+#' Used to identify important metadata fields to include when adding receiver
+#' data in the join_rcvr_data function.
+#'
+#' @return A vector of potential receiver metadata fields which the user may review
 #' @export
 get_rcvr_fields <- function(){
   if (!requireNamespace("pkg", quietly = TRUE)) {
@@ -70,21 +100,25 @@ get_rcvr_fields <- function(){
   info$variables
 }
 
-#' @export
-rcvr_fields = c("dep_id",
-                "receiver_serial_number",
-                "latitude",
-                "longitude",
-                "receiver_location",
-                "receiver_river_km",
-                "receiver_general_location",
-                "receiver_general_river_km",
-                "receiver_beacon_id_hex",
-                "receiver_start",
-                "receiver_end")
+#' A List of Important Receiver Related Fields from ERDAPP
+#'
+#' A vector of acoustic receiver metadata fields which are needed, at a minimum,
+#' to run the join_rcvr_data function
+#'
+#' @format A vector of potential receiver metadata fields which the user may review
+"rcvr_fields"
 
+
+#' Get A Dataframe of All Receiver Data from CalFishTrack
+#'
+#' This function searches the California Fish Tracking ERDAPP Database to create
+#' a dataframe ofacoustic receiver metadata. Desired fields can be set to select
+#' only certain fields, object rcvr_fields is the default. This data is used to add
+#' receiver metadata to detection data in the add_fish function.
+#'
+#' @return A dataframe of receiver metadata which can be joined to detection data
 #' @export
-get_rcvr_data <- function(fields = NULL){
+get_rcvr_data <- function(fields = rcvr_fields){
   if (!requireNamespace("pkg", quietly = TRUE)) {
     stop(
       "Package \"pkg\" must be installed to use this function.",
