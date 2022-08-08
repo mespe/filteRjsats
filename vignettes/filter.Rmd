@@ -13,10 +13,14 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
+```{r setup}
+library(filteRjsats)
+```
+
 
 ```{r choose a directory and generate a list of files, echo=TRUE}
 # Choose a Directory 
-path <- choose.dir()
+path <- "C:/Users/tspaulding/Documents/R/JSATS_Acoustic_Telemetry/1.Data/Inputs/raw"
 
 # List Files in Directory
 file <- list.files(path = path, recursive = TRUE)
@@ -24,7 +28,8 @@ file <- list.files(path = path, recursive = TRUE)
 
 ```{r assign timezone, echo=TRUE}
 # Get a list of Time Zones
-OlsonNames()
+# Not Run
+# OlsonNames()
 
 # Set Time Zone
 timezone <- "America/Los_Angeles"
@@ -42,7 +47,7 @@ det_list[[i]] <- jsats_file
 ```
 
 ```{r get a list of reference tags, echo=TRUE}
-#Get a list of reference tags
+# Get a list of reference tags
 reference_tags <- get_reference_tags()
 ```
 
@@ -109,11 +114,11 @@ get_rcvr_fields()
 #                  "receiver_end")
 
 #Get the receiver metadata
-rcvrs <- get_rcvr_data()
+rcvr_data <- get_rcvr_data()
 
 #Join the receiver metadata to the filtered detections
 for(i in 1:length(final_list)){
-  out <- join_rcvr_data(final_filter, rcvr_data)
+  out <- join_rcvr_data(final_list[[i]], rcvr_data)
   final_list[[i]]
 }
 ```
