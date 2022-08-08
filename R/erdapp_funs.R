@@ -7,9 +7,9 @@
 #' @return A vector of beacon tags hexadecimal IDs
 #' @export
 get_reference_tags <- function(){
-  if (!requireNamespace("pkg", quietly = TRUE)) {
+  if (!requireNamespace("rerddap", quietly = TRUE)) {
     stop(
-      "Package \"pkg\" must be installed to use this function.",
+      "Package \"rerddap\" must be installed to use this function.",
       call. = FALSE
     )
   }
@@ -30,9 +30,9 @@ get_reference_tags <- function(){
 #' @return A vector of potential fish fields which the user may review
 #' @export
 get_fish_fields <- function(){
-  if (!requireNamespace("pkg", quietly = TRUE)) {
+  if (!requireNamespace("rerddap", quietly = TRUE)) {
     stop(
-      "Package \"pkg\" must be installed to use this function.",
+      "Package \"rerddap\" must be installed to use this function.",
       call. = FALSE
     )
   }
@@ -51,9 +51,9 @@ get_fish_fields <- function(){
 #' @return A dataframe of fish data which can be joined to detection data
 #' @export
 get_tagged_fish <- function(important_fields = NULL){
-  if (!requireNamespace("pkg", quietly = TRUE)) {
+  if (!requireNamespace("rerddap", quietly = TRUE)) {
     stop(
-      "Package \"pkg\" must be installed to use this function.",
+      "Package \"rerddap\" must be installed to use this function.",
       call. = FALSE
     )
   }
@@ -89,9 +89,9 @@ get_tagged_fish <- function(important_fields = NULL){
 #' @return A vector of potential receiver metadata fields which the user may review
 #' @export
 get_rcvr_fields <- function(){
-  if (!requireNamespace("pkg", quietly = TRUE)) {
+  if (!requireNamespace("rerddap", quietly = TRUE)) {
     stop(
-      "Package \"pkg\" must be installed to use this function.",
+      "Package \"rerddap\" must be installed to use this function.",
       call. = FALSE
     )
   }
@@ -119,9 +119,9 @@ get_rcvr_fields <- function(){
 #' @return A dataframe of receiver metadata which can be joined to detection data
 #' @export
 get_rcvr_data <- function(fields = rcvr_fields){
-  if (!requireNamespace("pkg", quietly = TRUE)) {
+  if (!requireNamespace("rerddap", quietly = TRUE)) {
     stop(
-      "Package \"pkg\" must be installed to use this function.",
+      "Package \"rerddap\" must be installed to use this function.",
       call. = FALSE
     )
   }
