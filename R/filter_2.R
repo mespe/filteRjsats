@@ -11,8 +11,8 @@
 #' @return A filtered dataframe converting the raw detection data into rows of detections
 #' @export
 add_fish <- function(prefilter_file, fish){
-  fish_tmp <- fish[fish$fish_release_date > (min(prefilter_file$DateTime_Local)-lubridate::days(200)),]
-  prefilter_file$TagInFile = prefilter_file$Tag_Hex %in% fish_tmp$Tag_Hex #Check for Study Tags
+  fish_tmp <- fish$Tag_Hex[fish$fish_release_date > (min(prefilter_file$DateTime_Local)-lubridate::days(200)),]
+  prefilter_file$TagInFile = prefilter_file$Tag_Hex %in% fish_tmp #Check for Study Tags
   message(paste0("Detections in File: ",length(prefilter_file$DateTime_Local)))
   file <- prefilter_file[prefilter_file$TagInFile == TRUE,]
   file <- dplyr::left_join(file,fish_tmp, by= c("Tag_Hex" = "tag_id_hex"))
