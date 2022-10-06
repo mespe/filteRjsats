@@ -19,7 +19,7 @@ add_fish <- function(prefilter_file, fish){
   file$CheckDT = ifelse(file$DateTime_Local > file$fish_release_date,
                         TRUE, #Detections after release
                         FALSE) #Detections before release
-  file$CheckBattLife = ifelse(file$DateTime_Local <= file$fish_release_date+(2*file$tag_life),
+  file$CheckBattLife = ifelse(file$DateTime_Local <= file$fish_release_date+lubridate::days(2*file$tag_life),
                               TRUE, #Detections before tag failure
                               FALSE) #Detections after tag failure
   file <- file[file$CheckDT == TRUE & file$CheckBattLife == TRUE,]
