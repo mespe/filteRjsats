@@ -94,9 +94,16 @@ fish_list[[i]] <- fish_file
 # Empty list to store dataframes
 final_list <- list()
 
-# Apply the final filter
+# Apply the final 2 hit or 4 hit filter
 for(i in 1:length(fish_list)){
-final_filter <- second_filter(fish_list[[i]])
+final_filter <- second_filter_2h4h(fish_list[[i]])
+final_list[[i]] <- final_filter
+}
+
+# NOT RUN
+# Alternately apply a 4 hit filter
+for(i in 1:length(fish_list)){
+final_filter <- second_filter_4h(fish_list[[i]])
 final_list[[i]] <- final_filter
 }
 ```

@@ -41,7 +41,7 @@ second_filter_lotek <- function(fish_file){
   filtered$pr <- as.numeric(filtered$tag_pulse_rate_interval_nominal)
   filtered <- filtered[filtered$cs < filtered$pr*16.6 | is.na(filtered$cs),]
 
-  filtered$v1 = abs(filtered$pr-filtered$tdiff) < pr*0.20
+  filtered$v1 = abs(filtered$pr-filtered$tdiff) < filtered$pr*0.20
   filtered$v2 = abs(filtered$pr-dplyr::lead(filtered$tdiff)) < filtered$pr*0.20
   filtered$v3 = abs(filtered$pr-dplyr::lead(filtered$tdiff,2)) < filtered$pr*0.20
   filtered$sd_roll_check = rolling_sd_3(as.numeric(filtered$pr)) < 0.025
@@ -230,11 +230,11 @@ second_filter_tekno_4h <- function(fish_file){
                           filtered$DateTime_Local,
                           units = "secs")
   filtered$pr <- as.numeric(filtered$tag_pulse_rate_interval_nominal)
-  filtered <- filtered[filtered$cs < filtered$pr*16.6 | is.na(filtered$cs),]
-  filtered$v1 = abs(filtered$pr-filtered$tdiff) < pr*0.20
-  filtered$v2 = abs(filtered$pr-dplyr::lead(filtered$tdiff)) < filtered$pr*0.20
-  filtered$v3 = abs(filtered$pr-dplyr::lead(filtered$tdiff,2)) < filtered$pr*0.20
-  filtered$sd_roll_check = rolling_sd_3(as.numeric(filtered$pr)) < 0.025
+  filtered <- filtered[filtered$cs < filtered$pr_nom*16.6 | is.na(filtered$cs),]
+  filtered$v1 = abs(filtered$pr_nom-filtered$tdiff) < filtered$pr_nom*0.20
+  filtered$v2 = abs(filtered$pr_nom-dplyr::lead(filtered$tdiff)) < filtered$pr_nom*0.20
+  filtered$v3 = abs(filtered$pr_nom-dplyr::lead(filtered$tdiff,2)) < filtered$pr_nom*0.20
+  filtered$sd_roll_check = rolling_sd_3(as.numeric(filtered$pr_nom)) < 0.025
   filtered$sd_roll_check = ifelse(is.na(filtered$sd_roll_check),
                                   TRUE,
                                   filtered$sd_roll_check)
@@ -319,11 +319,11 @@ second_filter_ats_4h <- function(fish_file){
                           filtered$DateTime_Local,
                           units = "secs")
   filtered$pr <- as.numeric(filtered$tag_pulse_rate_interval_nominal)
-  filtered <- filtered[filtered$cs < filtered$pr*16.6 | is.na(filtered$cs),]
-  filtered$v1 = abs(filtered$pr-filtered$tdiff) < pr*0.20
-  filtered$v2 = abs(filtered$pr-dplyr::lead(filtered$tdiff)) < filtered$pr*0.20
-  filtered$v3 = abs(filtered$pr-dplyr::lead(filtered$tdiff,2)) < filtered$pr*0.20
-  filtered$sd_roll_check = rolling_sd_3(as.numeric(filtered$pr)) < 0.025
+  filtered <- filtered[filtered$cs < filtered$pr_nom*16.6 | is.na(filtered$cs),]
+  filtered$v1 = abs(filtered$pr_nom-filtered$tdiff) < filtered$pr_nom*0.20
+  filtered$v2 = abs(filtered$pr_nom-dplyr::lead(filtered$tdiff)) < filtered$pr_nom*0.20
+  filtered$v3 = abs(filtered$pr_nom-dplyr::lead(filtered$tdiff,2)) < filtered$pr_nom*0.20
+  filtered$sd_roll_check = rolling_sd_3(as.numeric(filtered$pr_nom)) < 0.025
   filtered$sd_roll_check = ifelse(is.na(filtered$sd_roll_check),
                                   TRUE,
                                   filtered$sd_roll_check)
