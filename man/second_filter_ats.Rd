@@ -19,5 +19,5 @@ multipath detections, and then check the remaining detections by comparing
 the time between each detection to ensure it is less 4x the stated pulse rate
 interval. It additionally checks that all detections have a frequency
 between 416.3 and 418.75 kHz and that the frequency of all detections are within
-0.505kHz of each other. Called by second_filter().
+0.505kHz of each other. Called by second_filter_2h4h().
 }

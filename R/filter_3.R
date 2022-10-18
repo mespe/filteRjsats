@@ -66,7 +66,7 @@ second_filter_lotek <- function(fish_file){
 #' the time between each detection to ensure it is less 4x the stated pulse rate
 #' interval. It additionally checks that all detections have a frequency
 #' between 390 and 445 kHz and that the frequency of all detections are within
-#' 55kHz of each other. Called by second_filter().
+#' 55kHz of each other. Called by second_filter_2h4h().
 #'
 #'
 #' @param fish_file a dataframe of detections retrieved from add_fish()
@@ -136,7 +136,7 @@ second_filter_tekno <- function(fish_file){
 #' the time between each detection to ensure it is less 4x the stated pulse rate
 #' interval. It additionally checks that all detections have a frequency
 #' between 416.3 and 418.75 kHz and that the frequency of all detections are within
-#' 0.505kHz of each other. Called by second_filter().
+#' 0.505kHz of each other. Called by second_filter_2h4h().
 #'
 #'
 #' @param fish_file a dataframe of detections retrieved from add_fish()
@@ -197,6 +197,20 @@ second_filter_ats <- function(fish_file){
   filtered
 }
 
+#' Four Hit Filter for Tekno Detections
+#'
+#' This function takes an Tekno detection dataframe generated from the
+#' add_fish() function and filters it a second time to remove any remaining
+#' multipath detections, and then check the remaining detections by comparing the time
+#' between detections, for a rolling window of 4 detections to ensure it is less
+#' 16.6x the stated pulse rate interval. It additionally checks that all detections have a frequency
+#' between 390 and 445 kHz and that the frequency of all detections are within
+#' 55kHz of each other. Called by second_filter_4h().
+#'
+#'
+#' @param fish_file a dataframe of detections retrieved from add_fish()
+#' @return A dataframe which has been filtered to remove false positives
+#' @export
 second_filter_tekno_4h <- function(fish_file){
   filtered <- fish_file
   filtered$pr_nom <- as.numeric(filtered$tag_pulse_rate_interval_nominal)

@@ -28,8 +28,8 @@ compare_df  <- function(a1,a2){
 #' @return the standard deviation of x, and the two leading values
 #' @export
 rolling_sd_3 <- function(x){
-  mean = (x + lead(x) + lead(x,2))/3
-  sos = (x-mean)^2+ (lead(x)-mean)^2 + (lead(x,2)-mean)^2
+  mean = (x + dplyr::lead(x) + dplyr::lead(x,2))/3
+  sos = (x-mean)^2+ (dplyr::lead(x)-mean)^2 + (dplyr::lead(x,2)-mean)^2
   sd = sqrt(sos/2)
 
   return(sd)
