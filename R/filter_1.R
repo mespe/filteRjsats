@@ -14,16 +14,16 @@
 #' @export
 prefilter <- function(jsats_file, reference_tags){
   temp <- jsats_file
-  temp <- dplyr::arrange(.data = temp,H)
-  temp <- dplyr::group_by(.data = temp, H)
-  temp <- dplyr::arrange(.data = temp, H, DT)
+  temp <- dplyr::arrange(.data = temp,Tag_Hex)
+  temp <- dplyr::group_by(.data = temp, Tag_Hex)
+  temp <- dplyr::arrange(.data = temp, Tag_Hex, DateTime_Local)
   det_count <- dplyr::summarise(temp, det_count = dplyr::n())
-  temp <- dplyr::left_join(temp, det_count, by = "H")
+  temp <- dplyr::left_join(temp, det_count, by = "Tag_Hex")
   temp <- temp[temp$det_count > 1,]
-  temp$time_diff_lag = difftime(temp$DT, dplyr::lag(temp$DT),
+  temp$time_diff_lag = difftime(temp$DateTime_Local, dplyr::lag(temp$DateTime_Local),
                                 units = "secs")
   temp$multipath = ifelse(temp$time_diff_lag > lubridate::seconds(0.3)|
-                            temp$H != dplyr::lag(temp$H), FALSE, TRUE)
+                            temp$Tag_Hex != dplyr::lag(temp$Tag_Hex), FALSE, TRUE)
   temp$multipath = ifelse(is.na(temp$time_diff_lag) &
                             dplyr::lead(temp$multipath) == FALSE,
                           FALSE,
@@ -31,10 +31,10 @@ prefilter <- function(jsats_file, reference_tags){
                                  TRUE,
                                  temp$multipath))
   temp <- temp[temp$multipath == FALSE,] # filter out Multipath
-  temp$time_diff_lag = difftime(temp$DT, dplyr::lag(temp$DT),
+  temp$time_diff_lag = difftime(temp$DateTime_Local, dplyr::lag(temp$DateTime_Local),
                                 units = "secs")
-  temp$time_diff_lag = ifelse(temp$H != dplyr::lag(temp$H),NA,temp$time_diff_lag)
-  temp$RefTag = ifelse(temp$D %in% reference_tags, TRUE, FALSE) #Is it a ref tag?
+  temp$time_diff_lag = ifelse(temp$Tag_Hex != dplyr::lag(temp$Tag_Hex),NA,temp$time_diff_lag)
+  temp$RefTag = ifelse(temp$Tag_Decimal %in% reference_tags, TRUE, FALSE) #Is it a ref tag?
   temp$CheckMBP = ifelse(temp$RefTag == TRUE, # If a ref tag,
                          (temp$time_diff_lag < lubridate::seconds(3*64)), # 2 hits in 3*Max PRI
                          (temp$time_diff_lag < lubridate::seconds(12*10))) # 2 hits in 12*Max PRI
@@ -49,12 +49,8 @@ prefilter <- function(jsats_file, reference_tags){
                          temp$CheckMBP) #Return Previous Assignment
   temp <- temp[temp$CheckMBP == TRUE,]
   det_count <- dplyr::summarise(temp, det_count = dplyr::n())
-  temp <- dplyr::left_join(temp, det_count, by = "H")
+  temp <- dplyr::left_join(temp, det_count, by = "Tag_Hex")
   temp <- temp[temp$det_count.y > 1,]
-  temp$DateTime_Local = temp$DT
-  temp$ReceiverSN = temp$R
-  temp$Tag_Decimal = temp$D
-  temp$Tag_Hex = temp$H
   temp <- dplyr::ungroup(temp)
   temp <- dplyr::select(.data =  temp,
                         any_of(c("ReceiverSN", "Make", "DateTime_Local", "Tag_Decimal", "Tag_Hex", "Tilt",

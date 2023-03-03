@@ -42,16 +42,16 @@ read_lotek <- function(path, file, timezone="America/Los_Angeles"){
                                 numeric(),
                                 character(),
                                 numeric()),
-                 col.names = c("R","DT","FS","D","H","P"),
+                 col.names = c("ReceiverSN","DateTime_Local","FS","Tag_Decimal","Tag_Hex","P"),
                  skip = 0)
-  LOT$R <- as.numeric(gsub("WHS4K-","",LOT$R)) #Turn the file name into serial
-  LOT$DT =  as.POSIXct(LOT$DT, #Convert serial DateTime to real DT
+  LOT$ReceiverSN <- as.numeric(gsub("WHS4K-","",LOT$ReceiverSN)) #Turn the file name into serial
+  LOT$DateTime_Local =  as.POSIXct(LOT$DateTime_Local, #Convert serial DateTime to real DT
                        tz = timezone,
                        origin = "1899-12-30")
   LOT$FS = lubridate::seconds(LOT$FS) #Convert fractional seconds from number to seconds
-  LOT$DT = LOT$DT+LOT$FS #Add them together
+  LOT$DateTime_Local = LOT$DateTime_Local+LOT$FS #Add them together
   LOT$Filename = stringr::str_split(file, pattern = '\\.')[[1]][1]
-  LOT$Make = rep("Lotek", length(LOT$DT))
+  LOT$Make = rep("Lotek", length(LOT$DateTime_Local))
   LOT
 }
 
@@ -77,15 +77,16 @@ read_tekno <- function(path, file, timezone="America/Los_Angeles"){
                   skip = 8,
                   header = TRUE)
 
-  TEK$H = as.character(substr(TEK$TagCode,4,7)) #Extract hex format of tag code
+  TEK$Tag_Hex = as.character(substr(TEK$TagCode,4,7)) #Extract hex format of tag code
   TEK <- TEK[TEK$valid == 1,] # filter out "invalid" detections X = 0
-  TEK$D = broman::hex2dec(TEK$H) # Convert hex to dec format
-  TEK$DT = lubridate::mdy_hms(TEK$Date.Time, tz = timezone)
+  TEK$ReceiverSN <- gsub("-","",TEK$Serial.Number) #Retrieve Serial Number
+  TEK$Tag_Decimal = broman::hex2dec(TEK$Tag_Hex) # Convert hex to dec format
+  TEK$DateTime_Local = lubridate::mdy_hms(TEK$Date.Time, tz = timezone)
   TEK$Volt = TEK$vBatt
   TEK$Freq = 416.666 + (TEK$Freq/1000)
   TEK$Thres = TEK$Thresh
   TEK$SigStr = TEK$snr
-  TEK$Make = rep("Tekno", length(TEK$DT))
+  TEK$Make = rep("Tekno", length(TEK$DateTime_Local))
   TEK
 
 }
@@ -117,10 +118,10 @@ read_ats <- function(path, file, timezone="America/Los_Angeles"){
                                   'SigStr', 'Bit_Period', 'Threshold'))
   ATS$DT_Check = grepl('\\.',ATS$DateTime)
   ATS <- ATS[ATS$DT_Check == TRUE,]
-  ATS$DT = lubridate::mdy_hms(ATS$DateTime, tz = timezone)
+  ATS$DateTime_Local = lubridate::mdy_hms(ATS$DateTime, tz = timezone)
   ATS$FullID = ATS$TagCode
-  ATS$H = as.character(substr(ATS$TagCode,5,8)) #There's a space before the G
-  ATS$D = broman::hex2dec(ATS$H)
+  ATS$Tag_Hex = as.character(substr(ATS$TagCode,5,8)) #There's a space before the G
+  ATS$Tag_Decimal = broman::hex2dec(ATS$Tag_Hex)
   ATS$Tilt = as.numeric(ATS$Tilt)
   ATS$Volt = as.numeric(ATS$VBatt)
   ATS$Temp = as.numeric(ATS$Temp)
@@ -136,10 +137,10 @@ read_ats <- function(path, file, timezone="America/Los_Angeles"){
                          sep = c("/",","))
   ATS$Freq = ifelse(is.na(ATS$B3),-999, 100000/(as.numeric(ATS$B1)+(as.numeric(ATS$B3)/31)))
   ATS$Thres = ifelse(is.na(ATS$B3), -999, as.numeric(ATS$Threshold))
-  R <-  gsub("SR","",stringr::str_split(file, pattern = '\\.')[[1]][1])
-  R <- stringr::str_split(R,pattern = '_')[[1]][1]
-  ATS$R <- rep(R, length(ATS$DT))
-  ATS$Make <- rep("ATS", length(ATS$DT))
+  ReceiverSN <-  gsub("SR","",stringr::str_split(file, pattern = '\\.')[[1]][1])
+  ReceiverSN <- stringr::str_split(ReceiverSN,pattern = '_')[[1]][1]
+  ATS$ReceiverSN <- rep(ReceiverSN, length(ATS$DateTime_Local))
+  ATS$Make <- rep("ATS", length(ATS$DateTime_Local))
   ATS
 }
 
