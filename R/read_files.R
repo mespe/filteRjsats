@@ -52,6 +52,8 @@ read_lotek <- function(path, file, timezone="America/Los_Angeles"){
   LOT$DateTime_Local = LOT$DateTime_Local+LOT$FS #Add them together
   LOT$Filename = stringr::str_split(file, pattern = '\\.')[[1]][1]
   LOT$Make = rep("Lotek", length(LOT$DateTime_Local))
+  LOT <- dplyr::select(.data =  LOT, ReceiverSN, Make, DateTime_Local,
+                       Tag_Decimal, Tag_Hex)
   LOT
 }
 
@@ -87,6 +89,8 @@ read_tekno <- function(path, file, timezone="America/Los_Angeles"){
   TEK$Thres = TEK$Thresh
   TEK$SigStr = TEK$snr
   TEK$Make = rep("Tekno", length(TEK$DateTime_Local))
+  TEK <- dplyr::select(.data =  TEK, ReceiverSN, Make, DateTime_Local,
+                       Tag_Decimal, Tag_Hex, Volt, SigStr, Freq, Thres)
   TEK
 
 }
@@ -141,6 +145,9 @@ read_ats <- function(path, file, timezone="America/Los_Angeles"){
   ReceiverSN <- stringr::str_split(ReceiverSN,pattern = '_')[[1]][1]
   ATS$ReceiverSN <- rep(ReceiverSN, length(ATS$DateTime_Local))
   ATS$Make <- rep("ATS", length(ATS$DateTime_Local))
+  ATS <- dplyr::select(.data =  ATS, ReceiverSN, Make, DateTime_Local,
+                       Tag_Decimal, Tag_Hex, Tilt, Volt, Temp, SigStr, Freq,
+                       Thres)
   ATS
 }
 
