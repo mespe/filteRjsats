@@ -2,6 +2,8 @@
 
 export(add_fish)
 export(compare_df)
+export(format_fish)
+export(format_jsats)
 export(get_fish_fields)
 export(get_rcvr_data)
 export(get_rcvr_fields)
