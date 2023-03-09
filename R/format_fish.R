@@ -1,0 +1,39 @@
+#' Format Fish Data for add_fish()
+#'
+#' This function takes a dataframe of fish and tag data and renames the
+#' columns to those expected by the add_fish() function
+#'
+#' @param data a dataframe of fish and tag data
+#' @param var_Id the column name, in quotes, which identifies the individual
+#' transmitter/tag/organism identifier.
+#' @param var_release the column name, in quotes, which identifies the release
+#' date and time in POSIX format and appropriate timezone
+#' @param var_tag_life the column name, in quotes, which identified the expected
+#' tag life in days
+#' @param var_ping_rate the column name, in quotes which identifies the expected
+#' ping rate of the tag/transmitter
+#' @param local_time_zone the local timezone used for analyses. Uses tz database
+#' names (e.g. "America/Los_Angeles" for Pacific Time)
+#' @return A dataframe which contains fields renamed to match those required by
+#' add_fish() function
+#' @export
+format_fish <- function(data, var_Id, var_release, var_tag_life, var_ping_rate,
+                        local_time_zone){
+  df <- data
+  df <- data %>%
+    rename("Tag_Hex" = var_Id,
+           "fish_release_date" = var_release,
+           "tag_life" = var_tag_life,
+           "tag_pulse_rate_interval_nominal" = var_ping_rate)
+
+  df <- df %>%
+    mutate(Tag_Hex = as.character(Tag_Hex),
+           fish_release_date =
+             lubridate::parse_date_time(as.character(fish_release_date),
+                                        tz = local_time_zone),
+           tag_life = as.numeric(tag_life),
+           tag_pulse_rate_interval_nominal =
+             as.numeric(tag_pulse_rate_interval_nominal))
+  return(df)
+}
+
