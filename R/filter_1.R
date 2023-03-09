@@ -48,12 +48,14 @@ prefilter <- function(jsats_file, reference_tags){
                          TRUE, #Valid
                          temp$CheckMBP) #Return Previous Assignment
   temp <- temp[temp$CheckMBP == TRUE,]
+  temp <- dplyr::select(.data =  temp,
+                        -c(`det_count`))
   det_count <- dplyr::summarise(temp, det_count = dplyr::n())
-  temp <- dplyr::left_join(temp, det_count, by = "Tag_Hex")
-  temp <- temp[temp$det_count.y > 1,]
+  temp <- dplyr::left_join(temp, `det_count`, by = "Tag_Hex")
+  temp <- temp[temp$det_count > 1,]
   temp <- dplyr::ungroup(temp)
   temp <- dplyr::select(.data =  temp,
-                        -c(time_diff_lag,multipath,RefTag,det_count))
+                        -c(time_diff_lag,multipath,RefTag,`det_count`))
   temp <- dplyr::arrange(temp, ReceiverSN, Tag_Hex, DateTime_Local)
   temp <- temp[!is.na(temp$DateTime_Local),]
   prefilter_file <- temp

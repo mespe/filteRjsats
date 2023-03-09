@@ -56,7 +56,8 @@ signal.}
 \value{
 A standardized detection dataframe which can be read by filteRjsats
 
-A standardized detection dataframe which can be read by filteRjsats
+A dataframe which contains fields renamed to match those required by
+add_receivers() function
 }
 \description{
 This function takes a detection dataframe from a single receiver and
