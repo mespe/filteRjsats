@@ -12,8 +12,8 @@ Description: A package for the filtering of raw acoustic telemetry transmissions
     from surfaces and false pings from other noise generating equipment. The 
     filter is unique for each technology type. The package was written in 
     concert with the Interagency Telemetry Advisory Group (iTAG) and makes use 
-    of the JSATS California Fish Tracking Database 
-    https://oceanview.pfeg.noaa.gov/CalFishTrack/
+    of the JSATS California Fish Tracking Database:
+    https://oceanview.pfeg.noaa.gov/CalFishTrack/ .
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

@@ -2,8 +2,9 @@
 
 export(add_fish)
 export(compare_df)
+export(format_detects)
 export(format_fish)
-export(format_jsats)
+export(format_receivers)
 export(get_fish_fields)
 export(get_rcvr_data)
 export(get_rcvr_fields)

@@ -21,13 +21,13 @@ format_fish <- function(data, var_Id, var_release, var_tag_life, var_ping_rate,
                         local_time_zone){
   df <- data
   df <- data %>%
-    rename("Tag_Hex" = var_Id,
+    dplyr::rename("Tag_Hex" = var_Id,
            "fish_release_date" = var_release,
            "tag_life" = var_tag_life,
            "tag_pulse_rate_interval_nominal" = var_ping_rate)
 
   df <- df %>%
-    mutate(Tag_Hex = as.character(Tag_Hex),
+    dplyr::mutate(Tag_Hex = as.character(Tag_Hex),
            fish_release_date =
              lubridate::parse_date_time(as.character(fish_release_date),
                                         tz = local_time_zone),

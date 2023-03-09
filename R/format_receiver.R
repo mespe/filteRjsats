@@ -20,17 +20,17 @@
 #' @return A dataframe which contains fields renamed to match those required by
 #' add_receivers() function
 #' @export
-format_jsats <- function(data, var_receiver_serial, var_receiver_make,
+format_receivers <- function(data, var_receiver_serial, var_receiver_make,
                          var_receiver_deploy, var_receiver_retrieve,
                          local_time_zone){
   df <- data
   df <- data %>%
-    rename("ReceiverSN" = var_receiver_serial,
+    dplyr::rename("ReceiverSN" = var_receiver_serial,
            "Make" = var_receiver_make,
            "receiver_start" = var_receiver_deploy,
            "receiver_end" = receiver_retrieve)
   df <- df %>%
-    mutate(ReceiverSN = as.character(ReceiverSN),
+    dplyr::mutate(ReceiverSN = as.character(ReceiverSN),
            Make = as.character(Make),
            receiver_start =
              lubridate::parse_date_time(as.character(receiver_start),

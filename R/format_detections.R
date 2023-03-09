@@ -23,20 +23,22 @@
 #' names (e.g. "America/Los_Angeles" for Pacific Time)
 #' @return A standardized detection dataframe which can be read by filteRjsats
 #' @export
-format_jsats <- function(data, var_Id, var_datetime_local, var_frequency,
+format_detects <- function(data, var_Id, var_datetime_local, var_frequency,
                          var_receiver_serial, var_receiver_make,
                          local_time_zone){
   df <- data
   df <- data %>%
-    rename("Tag_Hex" = var_Id,
+    dplyr::rename("Tag_Hex" = var_Id,
            "DateTime_Local" = var_datetime_local,
+           "Freq" = var_frequency,
            "ReceiverSN" = var_receiver_serial,
            "Make" = var_receiver_make)
   df <- df %>%
-    mutate(Tag_Hex = as.character(Tag_Hex),
-           DateTime_Local = lubridate::parse_date_time(as.character(DateTime_Local),
-                                                       tz = local_time_zone),
-           ReceiverSN = as.character(ReceiverSN),
-           Make = as.character(Make))
+    dplyr::mutate(Tag_Hex = as.character(Tag_Hex),
+                  DateTime_Local =
+                    lubridate::parse_date_time(as.character(DateTime_Local),
+                                               tz = local_time_zone),
+                  ReceiverSN = as.character(ReceiverSN),
+                  Make = as.character(Make))
   return(df)
 }
