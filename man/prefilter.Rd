@@ -7,9 +7,10 @@
 prefilter(jsats_file, reference_tags)
 }
 \arguments{
-\item{reference_tags}{A vector of potential reference (beacon) tag IDs}
+\item{jsats_file}{A dataframe which is the output from read_jstats() or
+format_detects()}
 
-\item{jstats_file}{A dataframe which is the output from read_jstats()}
+\item{reference_tags}{A vector of potential reference (beacon) tag IDs}
 }
 \value{
 A standardized detection dataframe

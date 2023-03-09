@@ -26,7 +26,3 @@ export(second_filter_ats_4h)
 export(second_filter_lotek)
 export(second_filter_tekno)
 export(second_filter_tekno_4h)
-
-importFrom("graphics", "lines")
-importFrom("utils", "read.csv", "read.delim", "setTxtProgressBar",
-           "txtProgressBar")

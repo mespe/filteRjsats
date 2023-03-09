@@ -6,6 +6,10 @@
 \usage{
 get_tagged_fish(important_fields = NULL)
 }
+\arguments{
+\item{important_fields}{a vector of important field names to be imported from the
+ERDDAP dataset}
+}
 \value{
 A dataframe of fish data which can be joined to detection data
 }

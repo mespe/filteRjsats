@@ -6,6 +6,10 @@
 \usage{
 get_rcvr_data(fields = rcvr_fields)
 }
+\arguments{
+\item{fields}{a vector of important field names to be imported from the
+ERDDAP dataset}
+}
 \value{
 A dataframe of receiver metadata which can be joined to detection data
 }

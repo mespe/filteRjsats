@@ -11,7 +11,7 @@
 #' @param var_datetime_local the column name, in quotes, which identifies the
 #' date and time of the detection event. This column should already have been converted
 #' to POSIXct format and should be converted to the local timezone.
-#' @param frequency the column name, in quotes, which identifies the maximum
+#' @param var_frequency the column name, in quotes, which identifies the maximum
 #' temporal frequency at which transmitters in organisms emit a detectable
 #' signal.
 #' @param var_receiver_serial the column name, in quotes, which identifies the

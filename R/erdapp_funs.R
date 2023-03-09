@@ -48,6 +48,8 @@ get_fish_fields <- function(){
 #' certain fields. This data is used to add fish data to detection data in the
 #' add_fish function.
 #'
+#' @param important_fields a vector of important field names to be imported from the
+#' ERDDAP dataset
 #' @return A dataframe of fish data which can be joined to detection data
 #' @export
 get_tagged_fish <- function(important_fields = NULL){
@@ -116,6 +118,8 @@ get_rcvr_fields <- function(){
 #' only certain fields, object rcvr_fields is the default. This data is used to add
 #' receiver metadata to detection data in the add_fish function.
 #'
+#' @param fields a vector of important field names to be imported from the
+#' ERDDAP dataset
 #' @return A dataframe of receiver metadata which can be joined to detection data
 #' @export
 get_rcvr_data <- function(fields = rcvr_fields){

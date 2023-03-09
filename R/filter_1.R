@@ -8,7 +8,8 @@
 #' that all detection dataframes from any technology type are identical and
 #' superfluous fields are removed.
 #'
-#' @param jstats_file A dataframe which is the output from read_jstats()
+#' @param jsats_file A dataframe which is the output from read_jstats() or
+#' format_detects()
 #' @param reference_tags A vector of potential reference (beacon) tag IDs
 #' @return A standardized detection dataframe
 #' @export

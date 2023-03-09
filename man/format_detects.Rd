@@ -25,6 +25,10 @@ transmitter/tag/organism identifier.}
 date and time of the detection event. This column should already have been converted
 to POSIXct format and should be converted to the local timezone.}
 
+\item{var_frequency}{the column name, in quotes, which identifies the maximum
+temporal frequency at which transmitters in organisms emit a detectable
+signal.}
+
 \item{var_receiver_serial}{the column name, in quotes, which identifies the
 serial number of the detection receiver}
 
@@ -34,10 +38,6 @@ make or brand of the detection receiver. Must be one of "ATS", "Lotek", or
 
 \item{local_time_zone}{the local timezone used for analyses. Uses tz database
 names (e.g. "America/Los_Angeles" for Pacific Time)}
-
-\item{frequency}{the column name, in quotes, which identifies the maximum
-temporal frequency at which transmitters in organisms emit a detectable
-signal.}
 }
 \value{
 A standardized detection dataframe which can be read by filteRjsats

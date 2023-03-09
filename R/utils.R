@@ -34,3 +34,13 @@ rolling_sd_3 <- function(x){
 
   return(sd)
 }
+
+#' Add in Global Variables
+utils::globalVariables(c('B2', 'BitPer', 'DateTime_Local', 'Freq', 'Make', 'ReceiverSN',
+                         'RefTag', 'SigStr', 'Tag_Decimal', 'Tag_Hex', 'Temp', 'Thres',
+                         'Tilt', 'Volt', 'fish_release_date', 'lines', 'multipath',
+                         'rcvr_fields', 'read.csv', 'read.delim',
+                         'receiver_beacon_id_hex', 'receiver_retrieve',
+                         'receiver_serial_number', 'receiver_start', 'setTxtProgressBar',
+                         'tag_life', 'tag_pulse_rate_interval_nominal', 'time_diff_lag',
+                         'txtProgressBar', '%>%'))
