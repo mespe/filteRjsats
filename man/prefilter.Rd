@@ -13,14 +13,14 @@ format_detects()}
 \item{reference_tags}{A vector of potential reference (beacon) tag IDs}
 }
 \value{
-A standardized detection dataframe
+A standardized detection dataframe with multipath detects removed
 }
 \description{
-This function takes a detection dataframe output from read_jsats and filters
-out multipath signals (time between detections < 0.3 seconds) and spurious
-signals which donot occur within a specified time frame of the last
-detection. For beacon tags, this time frame is 192 seconds, and for fish,
-this time is 120 seconds. Following this, the dataframes are standardized so
-that all detection dataframes from any technology type are identical and
-superfluous fields are removed.
+This function takes a detection dataframe output from read_jsats or from
+format_detects and filters out multipath signals (time between detections
+< 0.3 seconds) and spurious signals which do not occur within a specified
+time frame of the last detection. For beacon tags, this time frame is 192
+seconds, and for fish, this time is 120 seconds. Following this, the
+dataframes are standardized so that all detection dataframes from any
+technology type are identical and superfluous fields are removed.
 }

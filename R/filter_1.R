@@ -1,17 +1,17 @@
 #' Apply the "prefilter" to a Detection Dataframe
 #'
-#' This function takes a detection dataframe output from read_jsats and filters
-#' out multipath signals (time between detections < 0.3 seconds) and spurious
-#' signals which donot occur within a specified time frame of the last
-#' detection. For beacon tags, this time frame is 192 seconds, and for fish,
-#' this time is 120 seconds. Following this, the dataframes are standardized so
-#' that all detection dataframes from any technology type are identical and
-#' superfluous fields are removed.
+#' This function takes a detection dataframe output from read_jsats or from
+#' format_detects and filters out multipath signals (time between detections
+#' < 0.3 seconds) and spurious signals which do not occur within a specified
+#' time frame of the last detection. For beacon tags, this time frame is 192
+#' seconds, and for fish, this time is 120 seconds. Following this, the
+#' dataframes are standardized so that all detection dataframes from any
+#' technology type are identical and superfluous fields are removed.
 #'
 #' @param jsats_file A dataframe which is the output from read_jstats() or
 #' format_detects()
 #' @param reference_tags A vector of potential reference (beacon) tag IDs
-#' @return A standardized detection dataframe
+#' @return A standardized detection dataframe with multipath detects removed
 #' @export
 prefilter <- function(jsats_file, reference_tags){
   temp <- jsats_file

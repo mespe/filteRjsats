@@ -2,9 +2,10 @@
 #'
 #' This function takes a prefiltered detection dataframe from prefilter() and
 #' joins it to fish data downloaded from ERDAPP using the get_fish_data()
-#' function. Detections are then filtered durther based on the date and time of
-#' tag release and expected battery life. Detections occuring before release of
-#' the tag or after 2x the expected battery life are removed.
+#' function or formatted using the format_fish() function. Detections are then
+#' filtered further based on the date and time of tag release and expected
+#' battery life. Detections occurring before release of the tag or after 2x the
+#' expected battery life are removed.
 #'
 #' @param prefilter_file a prefiltered detection dataframe from prefilter()
 #' @param fish a dataframe of fish data rectrieved from get_fish_data()
