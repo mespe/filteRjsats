@@ -23,7 +23,9 @@ Imports:
     dplyr,
     lubridate,
     stringr,
-    tidyr
+    tidyr,
+    snow,
+    doSNOW
 Suggests: 
     knitr,
     rerddap,
