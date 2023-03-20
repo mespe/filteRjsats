@@ -1,8 +1,8 @@
 ---
-title: "filter"
+title: "Vignette_v2"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{filter}
+  %\VignetteIndexEntry{Vignette_v2}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -13,14 +13,13 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 ```
+
 ```{r setup}
 library(filteRjsats)
 ```
-
-
 ```{r choose a directory and generate a list of files, echo=TRUE}
 # Choose a Directory 
-path <- dir("inst", full.names = TRUE)
+path <- system.file("extdata", package = "filteRjsats")
 
 # List Files in Directory
 file <- list.files(path = path, recursive = TRUE)
