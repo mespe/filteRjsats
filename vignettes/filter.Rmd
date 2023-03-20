@@ -20,7 +20,7 @@ library(filteRjsats)
 
 ```{r choose a directory and generate a list of files, echo=TRUE}
 # Choose a Directory 
-path <- "C:/Users/tspaulding/Documents/R/JSATS_Acoustic_Telemetry/1.Data/Inputs/raw"
+path <- dir("inst", full.names = TRUE)
 
 # List Files in Directory
 file <- list.files(path = path, recursive = TRUE)
@@ -102,10 +102,10 @@ final_list[[i]] <- final_filter
 
 # NOT RUN
 # Alternately apply a 4 hit filter
-for(i in 1:length(fish_list)){
-final_filter <- second_filter_4h(fish_list[[i]])
-final_list[[i]] <- final_filter
-}
+# for(i in 1:length(fish_list)){
+# final_filter <- second_filter_4h(fish_list[[i]])
+# final_list[[i]] <- final_filter
+# }
 ```
 
 ```{r get receiver data, echo=TRUE}
@@ -128,4 +128,6 @@ for(i in 1:length(final_list)){
   out <- join_rcvr_data(final_list[[i]], rcvr_data)
   final_list[[i]]
 }
+
+print(out)
 ```

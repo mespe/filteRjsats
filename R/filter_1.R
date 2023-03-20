@@ -57,7 +57,7 @@ prefilter <- function(jsats_file, reference_tags){
   temp <- dplyr::ungroup(temp)
   temp <- dplyr::select(.data =  temp,
                         -c(time_diff_lag,multipath,RefTag,`det_count`))
-  temp <- dplyr::arrange(temp, ReceiverSN, Tag_Hex, DateTime_Local)
+  temp <- dplyr::arrange(.data = temp, `ReceiverSN`, `Tag_Hex`, `DateTime_Local`)
   temp <- temp[!is.na(temp$DateTime_Local),]
   prefilter_file <- temp
   prefilter_file
