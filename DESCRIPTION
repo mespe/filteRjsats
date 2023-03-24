@@ -25,10 +25,10 @@ Imports:
     stringr,
     tidyr,
     snow,
-    doSNOW
+    doSNOW,
+    rerddap
 Suggests: 
     knitr,
-    rerddap,
     rmarkdown
 Depends: 
     R (>= 2.10)
