@@ -382,13 +382,12 @@ second_filter_ats_4h <- function(fish_file){
 #' @export
 second_filter_2h4h <- function(fish_file){
 
-  ifelse(fish_file$Make[1] == "Lotek",
-         final_file <- second_filter_lotek(fish_file),
-         ifelse(fish_file$Make[1] == "Tekno",
-                final_file <- second_filter_tekno(fish_file),
-                ifelse(fish_file$Make[1] == "ATS",
-                       final_file <- second_filter_ats(fish_file),
-                       print("No Detections"))))
+  make = fish_file$Make[1]
+  final_file = NULL
+  if (make == "Lotek") final_file <- second_filter_lotek(fish_file)
+  if (make == "Tekno") final_file <- second_filter_tekno(fish_file)
+  if (make == "ATS")   final_file <- second_filter_ats(fish_file)
+  if (is.null(final_file)) error("Receiver make should be one of Lotek, Tekno, or ATS")
 
   message(paste0("Number of Valid Tag IDs: ", length(unique(final_file$Tag_Hex))))
   message(paste0("Number of Valid Detections: ", length(final_file$DateTime_Local)))
@@ -415,13 +414,12 @@ second_filter_2h4h <- function(fish_file){
 #' @export
 second_filter_4h <- function(fish_file){
 
-  ifelse(fish_file$Make[1] == "Lotek",
-         final_file <- second_filter_lotek(fish_file),
-         ifelse(fish_file$Make[1] == "Tekno",
-                final_file <- second_filter_tekno_4h(fish_file),
-                ifelse(fish_file$Make[1] == "ATS",
-                       final_file <- second_filter_ats_4h(fish_file),
-                       print("No Detections"))))
+  make = fish_file$Make[1]
+  final_file = NULL
+  if (make == "Lotek") final_file <- second_filter_lotek(fish_file)
+  if (make == "Tekno") final_file <- second_filter_tekno(fish_file)
+  if (make == "ATS")   final_file <- second_filter_ats(fish_file)
+  if (is.null(final_file)) error("Receiver make should be one of Lotek, Tekno, or ATS")
 
   message(paste0("Number of Valid Tag IDs: ", length(unique(final_file$Tag_Hex))))
   message(paste0("Number of Valid Detections: ", length(final_file$DateTime_Local)))
