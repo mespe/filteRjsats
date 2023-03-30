@@ -17,19 +17,19 @@
 #' date and time the receiver was retrieved
 #' @param local_time_zone the local timezone used for analyses. Uses tz database
 #' names (e.g. "America/Los_Angeles" for Pacific Time)
-#' @return A dataframe which contains fields renamed to match those required by
+#' @return A dataframe which contains fields renamed to match those needed by
 #' add_receivers() function
 #' @export
 format_receivers <- function(data, var_receiver_serial, var_receiver_make,
                          var_receiver_deploy, var_receiver_retrieve,
                          local_time_zone){
   df <- data
-  df <- data %>%
+  df <- data |>
     dplyr::rename("ReceiverSN" = var_receiver_serial,
            "Make" = var_receiver_make,
            "receiver_start" = var_receiver_deploy,
            "receiver_end" = receiver_retrieve)
-  df <- df %>%
+  df <- df |>
     dplyr::mutate(ReceiverSN = as.character(ReceiverSN),
            Make = as.character(Make),
            receiver_start =

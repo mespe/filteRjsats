@@ -14,19 +14,19 @@
 #' ping rate of the tag/transmitter
 #' @param local_time_zone the local timezone used for analyses. Uses tz database
 #' names (e.g. "America/Los_Angeles" for Pacific Time)
-#' @return A dataframe which contains fields renamed to match those required by
+#' @return A dataframe which contains fields renamed to match those needed by
 #' add_fish() function
 #' @export
 format_fish <- function(data, var_Id, var_release, var_tag_life, var_ping_rate,
                         local_time_zone){
   df <- data
-  df <- data %>%
+  df <- data |>
     dplyr::rename("Tag_Hex" = var_Id,
            "fish_release_date" = var_release,
            "tag_life" = var_tag_life,
            "tag_pulse_rate_interval_nominal" = var_ping_rate)
 
-  df <- df %>%
+  df <- df |>
     dplyr::mutate(Tag_Hex = as.character(Tag_Hex),
            fish_release_date =
              lubridate::parse_date_time(as.character(fish_release_date),

@@ -32,7 +32,7 @@ ping rate of the tag/transmitter}
 names (e.g. "America/Los_Angeles" for Pacific Time)}
 }
 \value{
-A dataframe which contains fields renamed to match those required by
+A dataframe which contains fields renamed to match those needed by
 add_fish() function
 }
 \description{

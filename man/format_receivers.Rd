@@ -34,7 +34,7 @@ date and time the receiver was retrieved}
 names (e.g. "America/Los_Angeles" for Pacific Time)}
 }
 \value{
-A dataframe which contains fields renamed to match those required by
+A dataframe which contains fields renamed to match those needed by
 add_receivers() function
 }
 \description{

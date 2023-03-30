@@ -24,13 +24,11 @@ Imports:
     lubridate,
     stringr,
     tidyr,
-    snow,
-    doSNOW,
     rerddap
 Suggests: 
     knitr,
     rmarkdown
 Depends: 
-    R (>= 2.10)
+    R (>= 4.1)
 LazyData: true
 VignetteBuilder: knitr
