@@ -40,7 +40,6 @@ rolling_sd_3 <- function(x){
 #' Sets all global variables to remove warnings in package build
 #'
 #' @name Set_GVs
-#' @import broman dplyr lubridate stringr tidyr
 utils::globalVariables(c('B2', 'BitPer', 'DateTime_Local', 'Freq', 'Make',
                          'ReceiverSN','RefTag', 'SigStr', 'Tag_Decimal',
                          'Tag_Hex', 'Temp', 'Thres','Tilt', 'Volt',

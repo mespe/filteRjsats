@@ -16,7 +16,7 @@ register_parallel <- function(files){
     library(broman)
     library(dplyr)})
   nrun <- length(files)
-  pb <- txtProgressBar(max=nrun, style=3)
+  pb <- utils::txtProgressBar(max=nrun, style=3)
   progress <- function(n) setTxtProgressBar(pb, n)
   opts <- list(progress=progress)
 }
