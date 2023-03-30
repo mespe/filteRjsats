@@ -387,7 +387,7 @@ second_filter_2h4h <- function(fish_file){
   if (make == "Lotek") final_file <- second_filter_lotek(fish_file)
   if (make == "Tekno") final_file <- second_filter_tekno(fish_file)
   if (make == "ATS")   final_file <- second_filter_ats(fish_file)
-  if (is.null(final_file)) error("Receiver make should be one of Lotek, Tekno, or ATS")
+  if (is.null(final_file)) errorCondition("Receiver make should be one of Lotek, Tekno, or ATS")
 
   message(paste0("Number of Valid Tag IDs: ", length(unique(final_file$Tag_Hex))))
   message(paste0("Number of Valid Detections: ", length(final_file$DateTime_Local)))
@@ -419,7 +419,7 @@ second_filter_4h <- function(fish_file){
   if (make == "Lotek") final_file <- second_filter_lotek(fish_file)
   if (make == "Tekno") final_file <- second_filter_tekno(fish_file)
   if (make == "ATS")   final_file <- second_filter_ats(fish_file)
-  if (is.null(final_file)) error("Receiver make should be one of Lotek, Tekno, or ATS")
+  if (is.null(final_file)) errorCondition("Receiver make should be one of Lotek, Tekno, or ATS")
 
   message(paste0("Number of Valid Tag IDs: ", length(unique(final_file$Tag_Hex))))
   message(paste0("Number of Valid Detections: ", length(final_file$DateTime_Local)))
