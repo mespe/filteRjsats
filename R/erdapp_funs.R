@@ -41,12 +41,6 @@ get_fish_fields <- function(){
 #' @return A dataframe of fish data which can be joined to detection data
 #' @export
 get_tagged_fish <- function(important_fields = NULL){
-  if (!requireNamespace("rerddap", quietly = TRUE)) {
-    stop(
-      "Package \"rerddap\" must be installed to use this function.",
-      call. = FALSE
-    )
-  }
   rerddap::cache_delete_all()
   info <- rerddap::info('FED_JSATS_taggedfish',
                         url = 'https://oceanview.pfeg.noaa.gov/erddap')
@@ -79,12 +73,6 @@ get_tagged_fish <- function(important_fields = NULL){
 #' @return A vector of potential receiver metadata fields which the user may review
 #' @export
 get_rcvr_fields <- function(){
-  if (!requireNamespace("rerddap", quietly = TRUE)) {
-    stop(
-      "Package \"rerddap\" must be installed to use this function.",
-      call. = FALSE
-    )
-  }
   info <- rerddap::info('FED_JSATS_receivers',
                         url = 'https://oceanview.pfeg.noaa.gov/erddap')
   info$variables
@@ -111,12 +99,6 @@ get_rcvr_fields <- function(){
 #' @return A dataframe of receiver metadata which can be joined to detection data
 #' @export
 get_rcvr_data <- function(fields = rcvr_fields){
-  if (!requireNamespace("rerddap", quietly = TRUE)) {
-    stop(
-      "Package \"rerddap\" must be installed to use this function.",
-      call. = FALSE
-    )
-  }
   rerddap::cache_delete_all()
   info <- rerddap::info('FED_JSATS_receivers',
                         url = 'https://oceanview.pfeg.noaa.gov/erddap')
