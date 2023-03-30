@@ -7,12 +7,6 @@
 #' @return A vector of beacon tags hexadecimal IDs
 #' @export
 get_reference_tags <- function(){
-  if (!requireNamespace("rerddap", quietly = TRUE)) {
-    stop(
-      "Package \"rerddap\" must be installed to use this function.",
-      call. = FALSE
-    )
-  }
   reference_tags <- rerddap::tabledap('FED_JSATS_receivers',
                                       url = "https://oceanview.pfeg.noaa.gov/erddap/",
                                       fields = c("receiver_beacon_id_hex",
@@ -30,12 +24,6 @@ get_reference_tags <- function(){
 #' @return A vector of potential fish fields which the user may review
 #' @export
 get_fish_fields <- function(){
-  if (!requireNamespace("rerddap", quietly = TRUE)) {
-    stop(
-      "Package \"rerddap\" must be installed to use this function.",
-      call. = FALSE
-    )
-  }
   info <- rerddap::info('FED_JSATS_taggedfish',
                         url = 'https://oceanview.pfeg.noaa.gov/erddap')
   info$variables
