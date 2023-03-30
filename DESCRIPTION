@@ -19,10 +19,6 @@ Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports: 
-Suggests: 
-    knitr,
-    rmarkdown
-Depends: 
     broman,
     dplyr,
     lubridate,
@@ -30,7 +26,11 @@ Depends:
     tidyr,
     snow,
     doSNOW,
-    rerddap,
+    rerddap
+Suggests: 
+    knitr,
+    rmarkdown
+Depends: 
     R (>= 2.10)
 LazyData: true
 VignetteBuilder: knitr
