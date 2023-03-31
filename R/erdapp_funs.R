@@ -14,6 +14,11 @@ get_reference_tags <- function(){
   reference_tags <- dplyr::distinct(.data = reference_tags, receiver_beacon_id_hex)
   reference_tags$receiver_beacon_id_hex
 }
+#' @examples
+#' # Download reference tags from CalFishTrack
+#' ref_tags <- get_reference_tags()
+#' head(ref_tags)
+#'
 
 #' Get A List of Fish Related Fields from ERDAPP
 #'
@@ -21,13 +26,17 @@ get_reference_tags <- function(){
 #' a list of all potential fields related to fish metrics. Used to identify
 #' important fish data fields to add to detection data in the add_fish function.
 #'
-#' @return A vector of potential fish fields which the user may review
+#' @return A vector of potential fish fields which the user may review to
+#' retrieve specific field indices
 #' @export
 get_fish_fields <- function(){
   info <- rerddap::info('FED_JSATS_taggedfish',
                         url = 'https://oceanview.pfeg.noaa.gov/erddap')
   info$variables
 }
+#' @examples
+#' fish_fields <- get_fish_fields
+#'
 
 #' Get A Dataframe of All Tagged fish from CalFishTrack
 #'
@@ -36,8 +45,8 @@ get_fish_fields <- function(){
 #' certain fields. This data is used to add fish data to detection data in the
 #' add_fish function.
 #'
-#' @param important_fields a vector of important field names to be imported from the
-#' ERDDAP dataset
+#' @param important_fields a vector of important field indexes to be imported
+#' from the ERDDAP dataset
 #' @return A dataframe of fish data which can be joined to detection data
 #' @export
 get_tagged_fish <- function(important_fields = NULL){
@@ -52,16 +61,38 @@ get_tagged_fish <- function(important_fields = NULL){
                             url = "https://oceanview.pfeg.noaa.gov/erddap/",
                             fields = fields)
   fish <- dplyr::distinct(fish)
-  fish$Tag_Hex = as.character(fish$tag_id_hex)
-  fish$fish_release_date = lubridate::mdy_hms(fish$fish_release_date, tz = "Etc/GMT+8")
-  fish$release_rkm = as.numeric(fish$release_river_km)
-  fish$tag_life = lubridate::days(as.integer(fish$tag_warranty_life))
-  fish$length = as.numeric(fish$fish_length)
-  fish$weight = as.numeric(fish$fish_weight)
-  fish$release_latitude = as.numeric(fish$release_latitude)
-  fish$release_longitude = as.numeric(fish$release_longitude)
+  if(!is.null(fish$tag_id_hex)) fish$Tag_Hex = as.character(fish$tag_id_hex)
+  if(!is.null(fish$fish_release_date))
+    fish$fish_release_date = lubridate::mdy_hms(fish$fish_release_date,
+                                                tz = "Etc/GMT+8")
+  if(!is.null(fish$release_river_km))
+    fish$release_rkm = as.numeric(fish$release_river_km)
+  if(!is.null(fish$tag_warranty_life))
+    fish$tag_life = lubridate::days(as.integer(fish$tag_warranty_life))
+  if(!is.null(fish$fish_length)) fish$length = as.numeric(fish$fish_length)
+  if(!is.null(fish$fish_weight)) fish$weight = as.numeric(fish$fish_weight)
+  if(!is.null(fish$release_latitude))
+    fish$release_latitude = as.numeric(fish$release_latitude)
+  if(!is.null(fish$release_longitude))
+    fish$release_longitude = as.numeric(fish$release_longitude)
   as.data.frame(fish)
 }
+#' @examples
+#' # Retrieve all fields from CalFishTrack tagged fish table
+#' calfish <- get_tagged_fish()
+#'
+#' # Retrieve only a few important fields (fish type, tag code, release date)
+#' fields <- c(7,8,16)
+#' cal_fish_lite <- get_tagged_fish(important_fields = fields)
+#'
+
+#' Example fish data from CalFishTrack
+#'
+#' A dataframe of acoustically tagged fish downloaded from ERDDAP representing
+#' fish released in 2021 and 2022.
+#'
+#' @format A dataframe of example acoustically tagged fish metadata
+"cft_fish"
 
 #' Get A List of Receiver Related Fields from ERDAPP
 #'
@@ -77,6 +108,10 @@ get_rcvr_fields <- function(){
                         url = 'https://oceanview.pfeg.noaa.gov/erddap')
   info$variables
 }
+#' @examples
+#' # View a list of available receiver fields
+#' get_rcvr_fields()
+#'
 
 #' A List of Important Receiver Related Fields from ERDAPP
 #'
@@ -85,7 +120,6 @@ get_rcvr_fields <- function(){
 #'
 #' @format A vector of potential receiver metadata fields which the user may review
 "rcvr_fields"
-
 
 #' Get A Dataframe of All Receiver Data from CalFishTrack
 #'
@@ -160,3 +194,18 @@ get_rcvr_data <- function(fields = rcvr_fields){
     unique_receiver$receiver_general_location %in% c("SJ_HOR_DS","SJ_HOR_US") ~ "SR_Head_of_Old_River")
   data.frame(unique_receiver)
 }
+#' @examples
+#' # Retrieve the default variables from Cal Fish Track
+#' get_rcvr_data()
+#'
+#' # Retrieve all receiver metadata fields
+#' get_rcvr_data(fields = c(1:22))
+#'
+
+#' Example receiver data from CalFishTrack
+#'
+#' A dataframe of acoustic receiver metadata downloaded from ERDDAP representing
+#' receivers deployed from 2021-2022.
+#'
+#' @format A dataframe of example acoustic receiver metadata
+"cft_rcvrs"
