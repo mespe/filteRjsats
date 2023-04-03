@@ -10,7 +10,8 @@ format_fish(
   var_release,
   var_tag_life,
   var_ping_rate,
-  local_time_zone
+  local_time_zone,
+  time_format
 )
 }
 \arguments{
@@ -30,10 +31,13 @@ ping rate of the tag/transmitter}
 
 \item{local_time_zone}{the local timezone used for analyses. Uses tz database
 names (e.g. "America/Los_Angeles" for Pacific Time)}
+
+\item{time_format}{a string value indicating the datetime format of all time
+fields}
 }
 \value{
-A dataframe which contains fields renamed to match those needed by
-add_fish() function
+A dataframe which contains fields renamed to match those required by
+add_org() function
 }
 \description{
 This function takes a dataframe of fish and tag data and renames the

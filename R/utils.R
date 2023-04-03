@@ -31,7 +31,6 @@ rolling_sd_3 <- function(x){
   mean = (x + dplyr::lead(x) + dplyr::lead(x,2))/3
   sos = (x-mean)^2+ (dplyr::lead(x)-mean)^2 + (dplyr::lead(x,2)-mean)^2
   sd = sqrt(sos/2)
-
   return(sd)
 }
 
@@ -49,4 +48,4 @@ utils::globalVariables(c('B2', 'BitPer', 'DateTime_Local', 'Freq', 'Make',
                          'receiver_serial_number', 'receiver_start',
                          'setTxtProgressBar', 'tag_life',
                          'tag_pulse_rate_interval_nominal', 'time_diff_lag',
-                         'txtProgressBar', '%>%'))
+                         'txtProgressBar', '%>%', 'receiver_end'))

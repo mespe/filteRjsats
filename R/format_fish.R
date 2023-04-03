@@ -14,26 +14,41 @@
 #' ping rate of the tag/transmitter
 #' @param local_time_zone the local timezone used for analyses. Uses tz database
 #' names (e.g. "America/Los_Angeles" for Pacific Time)
-#' @return A dataframe which contains fields renamed to match those needed by
-#' add_fish() function
+#' @param time_format a string value indicating the datetime format of all time
+#' fields
+#' @return A dataframe which contains fields renamed to match those required by
+#' add_org() function
+#' @import dplyr
 #' @export
 format_fish <- function(data, var_Id, var_release, var_tag_life, var_ping_rate,
-                        local_time_zone){
+                       local_time_zone, time_format){
   df <- data
   df <- data |>
     dplyr::rename("Tag_Hex" = var_Id,
-           "fish_release_date" = var_release,
-           "tag_life" = var_tag_life,
-           "tag_pulse_rate_interval_nominal" = var_ping_rate)
+                  "fish_release_date" = var_release,
+                  "tag_life" = var_tag_life,
+                  "tag_pulse_rate_interval_nominal" = var_ping_rate)
 
   df <- df |>
     dplyr::mutate(Tag_Hex = as.character(Tag_Hex),
-           fish_release_date =
-             lubridate::parse_date_time(as.character(fish_release_date),
-                                        tz = local_time_zone),
-           tag_life = as.numeric(tag_life),
-           tag_pulse_rate_interval_nominal =
-             as.numeric(tag_pulse_rate_interval_nominal))
+                  fish_release_date =
+                    lubridate::parse_date_time(as.character(fish_release_date),
+                                               tz = local_time_zone,
+                                               orders = c(time_format)),
+                  tag_life = as.numeric(tag_life),
+                  tag_pulse_rate_interval_nominal =
+                    as.numeric(tag_pulse_rate_interval_nominal))
   return(df)
 }
+#' @examples
+#'
+#' # Rename columns to work with functions
+#' format_fish(data = fish,
+#'             var_Id = "TagCode",
+#'             var_release = "Release_Date",
+#'             var_tag_life = "TagLife",
+#'             var_ping_rate = "PRI",
+#'             local_time_zone = "America/Los_Angeles",
+#'             time_format = "%Y-%m-%d %H:%M:%S")
+#'
 

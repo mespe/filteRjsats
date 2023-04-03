@@ -17,6 +17,7 @@ join_rcvr_data <- function(final_file, rcvr_data){
   out
 }
 #' @examples
+#'
 #' # Join receiver metadata to detection data
 #' join_rcvr_data(fish_detects, cft_rcvrs)
 #'
