@@ -108,7 +108,7 @@ final_list[[i]] <- final_filter
 ```
 
 ```{r get receiver data, echo=TRUE}
-# View all the receiver metadta fields
+# View all the receiver metadata fields
 get_rcvr_fields()
 
 # NOT RUN
@@ -128,5 +128,6 @@ for(i in 1:length(final_list)){
   final_list[[i]]
 }
 
-print(out)
+print(final_list[[1]])
+print(final_list[[2]])
 ```
