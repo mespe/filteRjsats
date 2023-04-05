@@ -36,6 +36,6 @@ read_tekno <- function(path, file, timezone="America/Los_Angeles"){
 }
 #' @examples
 #' # Read in a Teknologic file
-#' read_tekno(path = "inst/extdata", file = "2015-6016210470906.SUM",
+#' read_tekno(path = "inst/extdata", file = "2015-6007211361217.SUM",
 #' timezone = "America/Los_Angeles")
 #'

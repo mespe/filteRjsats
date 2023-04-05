@@ -28,6 +28,7 @@ read_jsats <- function(path, file, timezone="America/Los_Angeles"){
 }
 #' @examples
 #' # Read in any ATS, LOTEK, TEKNO file
+#'
 #' # list of files
 #' files <- system.file("extdata", package = "filteRjsats") |>
 #' list.files("test")

@@ -55,7 +55,7 @@ read_ats <- function(path, file, timezone="America/Los_Angeles"){
 }
 #' @examples
 #' # Read in an ATS file
-#' read_ats(path = "inst/extdata", file = "SR21023_210603_091321.csv",
+#' read_ats(path = "inst/extdata", file = "17111___210531_115356.csv",
 #' timezone = "America/Los_Angeles")
 #' # Warnings are expected due to the formatting of ATS files
 #'
