@@ -21,7 +21,7 @@
 #' raw_data <- list()
 #'
 #' for(i in 1:length(files)){
-#' raw_data[[i]] <- read_jsats(path = "inst/extdata", file = files[i],
+#' raw_data[[i]] <- read_jsats(path = "extdata", file = files[i],
 #' timezone = "America/Los_Angeles")
 #' }
 #' # Warnings are expected due to the formatting of ATS files
