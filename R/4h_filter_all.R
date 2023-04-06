@@ -25,7 +25,7 @@ second_filter_4h <- function(fish_file){
   message(paste0("Number of Valid Tag IDs: ", length(unique(final_file$Tag_Hex))))
   message(paste0("Number of Valid Detections: ", length(final_file$DateTime_Local)))
 
-  spur <- compare_df(fish_file, final_file)
+  spur <- compare_detects(fish_file, final_file)
 
   message(paste0("Number of Tags with Spurious Detections: ", length(unique(spur$Tag_Hex))))
   message(paste0("Tags with Only Spurious Detections: "), spur$TagHex[which(!(unique(spur$Tag_Hex) %in% (unique(final_file$Tag_Hex))))])
