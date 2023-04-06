@@ -27,7 +27,7 @@ in this package.
 
 # list of files
 files <- system.file("extdata", package = "filteRjsats") |>
-list.files("test")
+list.files()
 
 # Read the files
 raw_data <- list()
