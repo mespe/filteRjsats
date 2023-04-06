@@ -26,14 +26,13 @@ in this package.
 # Read in any ATS, LOTEK, TEKNO file
 
 # list of files
-files <- system.file("extdata", package = "filteRjsats") |>
-list.files()
+path = system.file("extdata", package = "filteRjsats")
+files <- list.files(path)
 
 # Read the files
 raw_data <- list()
-
 for(i in 1:length(files)){
-raw_data[[i]] <- read_jsats(path = "extdata", file = files[i],
+raw_data[[i]] <- read_jsats(path = path, file = files[i],
 timezone = "America/Los_Angeles")
 }
 # Warnings are expected due to the formatting of ATS files
