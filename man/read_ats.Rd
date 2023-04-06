@@ -23,7 +23,8 @@ functions in this package.This is called within read_jsats().
 }
 \examples{
 # Read in an ATS file
-read_ats(path = "extdata", file = "17111___210531_115356.csv",
+path = system.file("extdata/", package = "filteRjsats")
+read_ats(path = path, file = "17111___210531_115356.csv",
 timezone = "America/Los_Angeles")
 # Warnings are expected due to the formatting of ATS files
 }

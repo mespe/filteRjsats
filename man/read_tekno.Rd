@@ -23,6 +23,7 @@ the filtering functions in this package. This is called within read_jsats().
 }
 \examples{
 # Read in a Teknologic file
-read_tekno(path = "extdata", file = "2015-6007211361217.SUM",
+path = system.file("extdata/", package = "filteRjsats")
+read_tekno(path = path, file = "2015-6007211361217.SUM",
 timezone = "America/Los_Angeles")
 }
