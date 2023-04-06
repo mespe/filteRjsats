@@ -5,15 +5,13 @@
 #' Used to identify important metadata fields to include when adding receiver
 #' data in the join_rcvr_data function.
 #'
-#' @return A vector of potential receiver metadata fields which the user may review
+#' @returns A vector of potential receiver metadata fields which the user may review
 #' @export
+#' @examples
+#' # View a list of available receiver fields
+#' get_rcvr_fields()
 get_rcvr_fields <- function(){
   info <- rerddap::info('FED_JSATS_receivers',
                         url = 'https://oceanview.pfeg.noaa.gov/erddap')
   info$variables
 }
-#' @examples
-#'
-#' # View a list of available receiver fields
-#' get_rcvr_fields()
-#'

@@ -7,8 +7,12 @@
 #'
 #'
 #' @param fish_file a dataframe of detections retrieved from add_fish()
-#' @return A dataframe which has been filtered to remove false positives
+#' @returns A dataframe which has been filtered to remove false positives
 #' @export
+#' @examples
+#' # Apply a 4 hit filter based on the technology
+#' second_filter_4h(filter_fish_detects)
+#' # No detections are valid, 15 tags accounted for a total of 30 spurious detects
 second_filter_4h <- function(fish_file){
 
   make = fish_file$Make[1]
@@ -29,8 +33,4 @@ second_filter_4h <- function(fish_file){
 
   final_file
 }
-#' @examples
-#' # Apply a 4 hit filter based on the technology
-#' second_filter_4h(filter_fish_detects)
-#' # No detections are valid, 15 tags accounted for a total of 30 spurious detects
-#'
+

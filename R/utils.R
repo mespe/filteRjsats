@@ -8,9 +8,13 @@
 #'
 #' @param a1 unfiltered detection dataframe
 #' @param a2 filtered detection dataframe
-#' @return A dataframe of detections from the original dataframe missing from the filtered dataframe. Spurious detections.
+#' @return A dataframe of detections from the original dataframe missing from
+#' the filtered dataframe. Spurious detections.
 #' @export
-compare_df  <- function(a1,a2){
+#' @examples
+#' # Compare detections before and after filtering
+#' compare_detects(raw_ats, filter_fish_detects)
+compare_detects  <- function(a1,a2){
   a3 <- dplyr::select(a1, Tag_Hex, DateTime_Local)
   a4 <- dplyr::select(a2, Tag_Hex, DateTime_Local)
   a1.vec <- apply(a3, 1, paste, collapse = "")
@@ -25,8 +29,13 @@ compare_df  <- function(a1,a2){
 #' rolling standard deviation with a window including the 2 leading values.
 #'
 #' @param x an indexed position of a value in a vector for which the rolling standard deviation is needed
-#' @return the standard deviation of x, and the two leading values
+#' @returns the standard deviation of x, and the two leading values
 #' @export
+#' @examples
+#' # Calculate rolling Standard Deviation
+#' set.seed(1234)
+#' x <- rnorm(n = 100, mean = 10, sd = 1)
+#' rolling_sd_3(x)
 rolling_sd_3 <- function(x){
   mean = (x + dplyr::lead(x) + dplyr::lead(x,2))/3
   sos = (x-mean)^2+ (dplyr::lead(x)-mean)^2 + (dplyr::lead(x,2)-mean)^2

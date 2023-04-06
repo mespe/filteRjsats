@@ -8,8 +8,23 @@
 #' @param path the path to the folder containing the desired file
 #' @param file the path of the desired file
 #' @param timezone the Olsen Named time zone, default is "America/Los_Angeles"
-#' @return A dataframe converting the raw detection data into rows of detections
+#' @returns A dataframe converting the raw detection data into rows of detections
 #' @export
+#' @examples
+#' # Read in any ATS, LOTEK, TEKNO file
+#'
+#' # list of files
+#' files <- system.file("extdata", package = "filteRjsats") |>
+#' list.files("test")
+#'
+#' # Read the files
+#' raw_data <- list()
+#'
+#' for(i in 1:length(files)){
+#' raw_data[[i]] <- read_jsats(path = "inst/extdata", file = files[i],
+#' timezone = "America/Los_Angeles")
+#' }
+#' # Warnings are expected due to the formatting of ATS files
 read_jsats <- function(path, file, timezone="America/Los_Angeles"){
   # file_name <- stringr::str_split(file, pattern = '\\.')[[1]][1]
   file_type <- ifelse(stringr::str_detect(file,'L'),
@@ -26,19 +41,3 @@ read_jsats <- function(path, file, timezone="America/Los_Angeles"){
     errorCondition("Receiver make should be one of Lotek, Tekno, or ATS")
   jsats_file
 }
-#' @examples
-#' # Read in any ATS, LOTEK, TEKNO file
-#'
-#' # list of files
-#' files <- system.file("extdata", package = "filteRjsats") |>
-#' list.files("test")
-#'
-#' # Read the files
-#' raw_data <- list()
-#'
-#' for(i in 1:length(files)){
-#' raw_data[[i]] <- read_jsats(path = "inst/extdata", file = files[i],
-#' timezone = "America/Los_Angeles")
-#' }
-#' # Warnings are expected due to the formatting of ATS files
-#'

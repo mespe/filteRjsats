@@ -7,8 +7,12 @@
 #' @param path the path to the folder containing the desired file
 #' @param file the path of the desired file
 #' @param timezone the Olsen Named time zone, default is "America/Los_Angeles"
-#' @return A dataframe converting the raw detection data into rows of detections
+#' @returns A dataframe converting the raw detection data into rows of detections
 #' @export
+#' @examples
+#' # Read in a Teknologic file
+#' read_tekno(path = "inst/extdata", file = "2015-6007211361217.SUM",
+#' timezone = "America/Los_Angeles")
 read_tekno <- function(path, file, timezone="America/Los_Angeles"){
 
   TEK <- read.csv(file.path(path,file),
@@ -34,8 +38,3 @@ read_tekno <- function(path, file, timezone="America/Los_Angeles"){
                        Tag_Decimal, Tag_Hex, Volt, SigStr, Freq, Thres)
   TEK
 }
-#' @examples
-#' # Read in a Teknologic file
-#' read_tekno(path = "inst/extdata", file = "2015-6007211361217.SUM",
-#' timezone = "America/Los_Angeles")
-#'

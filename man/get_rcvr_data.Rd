@@ -19,3 +19,10 @@ a dataframe ofacoustic receiver metadata. Desired fields can be set to select
 only certain fields, object rcvr_fields is the default. This data is used to add
 receiver metadata to detection data in the add_fish function.
 }
+\examples{
+# Retrieve the default variables from Cal Fish Track
+get_rcvr_data()
+
+# Retrieve all receiver metadata fields
+get_rcvr_data(fields = c(1:22))
+}

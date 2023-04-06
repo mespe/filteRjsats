@@ -15,3 +15,6 @@ This function searches the California Fish Tracking ERDAPP Database to create
 a list of all potential fields related to fish metrics. Used to identify
 important fish data fields to add to detection data in the add_fish function.
 }
+\examples{
+fish_fields <- get_fish_fields
+}

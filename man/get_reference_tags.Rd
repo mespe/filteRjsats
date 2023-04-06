@@ -14,3 +14,8 @@ This function searches the California Fish Tracking ERDAPP Database to create
 a list of beacon tag hexadecimal IDs. Used in the prefilter to separate
 beacon tags from tagged fish.
 }
+\examples{
+# Download reference tags from CalFishTrack
+ref_tags <- get_reference_tags()
+head(ref_tags)
+}

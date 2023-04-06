@@ -13,8 +13,13 @@
 #'
 #'
 #' @param fish_file a dataframe of detections retrieved from add_fish()
-#' @return A dataframe which has been filtered to remove false positives
+#' @returns A dataframe which has been filtered to remove false positives
 #' @export
+#' @examples
+#' # Apply a four-hit ATS filter to a prefiltered dataset with fish and tag
+#' # attributes
+#' second_filter_ats_4h(filter_fish_detects)
+#' # No detections are valid
 second_filter_ats_4h <- function(fish_file){
   filtered <- fish_file
   filtered$pr_nom <- as.numeric(filtered$tag_pulse_rate_interval_nominal)
@@ -85,9 +90,4 @@ second_filter_ats_4h <- function(fish_file){
   filtered <- dplyr::left_join(filtered, det_count, by = "Tag_Hex")
   filtered
 }
-#' @examples
-#' # Apply a four-hit ATS filter to a prefiltered dataset with fish and tag
-#' # attributes
-#' second_filter_ats_4h(filter_fish_detects)
-#' # No detections are valid
-#'
+

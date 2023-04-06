@@ -43,3 +43,13 @@ add_org() function
 This function takes a dataframe of fish and tag data and renames the
 columns to those expected by the add_fish() function
 }
+\examples{
+# Rename columns to work with functions
+format_fish(data = fish,
+            var_Id = "TagCode",
+            var_release = "Release_Date",
+            var_tag_life = "TagLife",
+            var_ping_rate = "PRI",
+            local_time_zone = "America/Los_Angeles",
+            time_format = "\%Y-\%m-\%d \%H:\%M:\%S")
+}

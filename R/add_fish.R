@@ -9,8 +9,13 @@
 #'
 #' @param prefilter_file a prefiltered detection dataframe from prefilter()
 #' @param fish a dataframe of fish data rectrieved from get_fish_data()
-#' @return A filtered dataframe converting the raw detection data into rows of detections
+#' @returns A filtered dataframe converting the raw detection data into rows of detections
 #' @export
+#' @examples
+#' # Add fish data to a detection dataframe and filter for only detections
+#' # associated with tagged fish
+#'
+#' add_fish(prefiltered_detects, cft_fish)
 add_fish <- function(prefilter_file, fish){
   fish_tmp <- fish[fish$fish_release_date > (min(prefilter_file$DateTime_Local)-lubridate::days(200)),]
   prefilter_file$TagInFile = prefilter_file$Tag_Hex %in% fish_tmp$tag_id_hex #Check for Study Tags
@@ -34,9 +39,3 @@ add_fish <- function(prefilter_file, fish){
 
   fish_file
 }
-#' @examples
-#' # Add fish data to a detection dataframe and filter for only detections
-#' # associated with tagged fish
-#'
-#' add_fish(prefiltered_detects, cft_fish)
-#'

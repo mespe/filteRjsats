@@ -24,3 +24,7 @@ seconds, and for fish, this time is 120 seconds. Following this, the
 dataframes are standardized so that all detection dataframes from any
 technology type are identical and superfluous fields are removed.
 }
+\examples{
+# Filter a raw detection dataset
+prefilter(raw_ats, reftags)
+}

@@ -21,3 +21,9 @@ between detections, for a rolling window of 4 detections to ensure it is less
 between 390 and 445 kHz and that the frequency of all detections are within
 55kHz of each other. Called by second_filter_4h().
 }
+\examples{
+# Apply a four-hit Teknologics filter to a prefiltered dataset with fish and tag
+# attributes
+second_filter_tekno_4h(filter_fish_detects)
+# No detections are valid
+}

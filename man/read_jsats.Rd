@@ -22,3 +22,19 @@ Teknologic, or ATS JSATS receiver and determines which reader function to use
 to process it into a dataframe which can be used by the filtering functions
 in this package.
 }
+\examples{
+# Read in any ATS, LOTEK, TEKNO file
+
+# list of files
+files <- system.file("extdata", package = "filteRjsats") |>
+list.files("test")
+
+# Read the files
+raw_data <- list()
+
+for(i in 1:length(files)){
+raw_data[[i]] <- read_jsats(path = "inst/extdata", file = files[i],
+timezone = "America/Los_Angeles")
+}
+# Warnings are expected due to the formatting of ATS files
+}

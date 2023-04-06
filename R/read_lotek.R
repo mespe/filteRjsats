@@ -7,8 +7,11 @@
 #' @param path the path to the folder containing the desired file
 #' @param file the path of the desired file
 #' @param timezone the Olsen Named time zone, default is "America/Los_Angeles"
-#' @return A dataframe converting the raw detection data into rows of detections
+#' @returns A dataframe converting the raw detection data into rows of detections
 #' @export
+#' @examples
+#' # see read_ats or read_tekno for example usage
+#'
 read_lotek <- function(path, file, timezone="America/Los_Angeles"){
   LOT = read.csv(file.path(path,file),
                  colClasses = c(character(),

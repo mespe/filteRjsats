@@ -15,3 +15,7 @@ a list of all potential fields related to acoustic receiver metadata.
 Used to identify important metadata fields to include when adding receiver
 data in the join_rcvr_data function.
 }
+\examples{
+# View a list of available receiver fields
+get_rcvr_fields()
+}

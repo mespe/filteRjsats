@@ -21,3 +21,9 @@ interval. It additionally checks that all detections have a frequency
 between 416.3 and 418.75 kHz and that the frequency of all detections are within
 0.505kHz of each other. Called by second_filter_2h4h().
 }
+\examples{
+# Apply the ATS filter to a prefiltered dataset with fish and tag
+# attributes
+second_filter_ats(filter_fish_detects)
+# No detections are valid
+}

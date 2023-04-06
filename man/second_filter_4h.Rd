@@ -18,3 +18,8 @@ the add_fish() function and filters it a second time to remove any remaining
 multipath detections. Then applies an algorithm to assess and filter all
 remaining detections based on a four hit filter.
 }
+\examples{
+# Apply a 4 hit filter based on the technology
+second_filter_4h(filter_fish_detects)
+# No detections are valid, 15 tags accounted for a total of 30 spurious detects
+}

@@ -22,3 +22,9 @@ filtered further based on the date and time of tag release and expected
 battery life. Detections occurring before release of the tag or after 2x the
 expected battery life are removed.
 }
+\examples{
+# Add fish data to a detection dataframe and filter for only detections
+# associated with tagged fish
+
+add_fish(prefiltered_detects, cft_fish)
+}

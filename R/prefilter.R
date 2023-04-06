@@ -11,8 +11,11 @@
 #' @param jsats_file A dataframe which is the output from read_jstats() or
 #' format_detects()
 #' @param reference_tags A vector of potential reference (beacon) tag IDs
-#' @return A standardized detection dataframe with multipath detects removed
+#' @returns A standardized detection dataframe with multipath detects removed
 #' @export
+#' @examples
+#' # Filter a raw detection dataset
+#' prefilter(raw_ats, reftags)
 prefilter <- function(jsats_file, reference_tags){
   temp <- jsats_file
   temp <- dplyr::arrange(.data = temp,Tag_Hex)
@@ -62,8 +65,3 @@ prefilter <- function(jsats_file, reference_tags){
   prefilter_file <- temp
   prefilter_file
 }
-#' @examples
-#'
-#' # Filter a raw detection dataset
-#' prefilter(raw_ats, reftags)
-#'

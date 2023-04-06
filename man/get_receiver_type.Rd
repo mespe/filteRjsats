@@ -17,3 +17,10 @@ This function takes a list of file paths to raw acoustic receiver detection
 files supplied by the user and identifies the type of acoustic receiver
 technology (Lotek, ATS, Teknologic) used to generate the file.
 }
+\examples{
+# get a list of files
+files <- system.file("extdata", package = "filteRjsats")|> list.files()
+
+# get the receiver type
+get_receiver_type(files)
+}

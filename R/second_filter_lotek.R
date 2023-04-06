@@ -10,8 +10,13 @@
 #' is less than 0.025. Called by second_filter().
 #'
 #' @param fish_file a dataframe of detections retrieved from add_fish()
-#' @return A dataframe which has been filtered to remove false positives
+#' @returns A dataframe which has been filtered to remove false positives
 #' @export
+#' @examples
+#' # Apply the Lotek filter to a prefiltered dataset with fish and tag
+#' # attributes
+#' second_filter_lotek(filter_fish_detects)
+#' # No detections are valid
 second_filter_lotek <- function(fish_file){
   filtered <- fish_file
   filtered <- dplyr::group_by(.data = filtered, Tag_Hex)

@@ -4,8 +4,12 @@
 #' a list of beacon tag hexadecimal IDs. Used in the prefilter to separate
 #' beacon tags from tagged fish.
 #'
-#' @return A vector of beacon tags hexadecimal IDs
+#' @returns A vector of beacon tags hexadecimal IDs
 #' @export
+#' @examples
+#' # Download reference tags from CalFishTrack
+#' ref_tags <- get_reference_tags()
+#' head(ref_tags)
 get_reference_tags <- function(){
   reference_tags <- rerddap::tabledap('FED_JSATS_receivers',
                                       url = "https://oceanview.pfeg.noaa.gov/erddap/",
@@ -14,8 +18,3 @@ get_reference_tags <- function(){
   reference_tags <- dplyr::distinct(.data = reference_tags, receiver_beacon_id_hex)
   reference_tags$receiver_beacon_id_hex
 }
-#' @examples
-#' # Download reference tags from CalFishTrack
-#' ref_tags <- get_reference_tags()
-#' head(ref_tags)
-#'

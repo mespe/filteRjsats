@@ -16,3 +16,9 @@ the standard deviation of x, and the two leading values
 This function is called within the third filter, and used to calculate a
 rolling standard deviation with a window including the 2 leading values.
 }
+\examples{
+# Calculate rolling Standard Deviation
+set.seed(1234)
+x <- rnorm(n = 100, mean = 10, sd = 1)
+rolling_sd_3(x)
+}

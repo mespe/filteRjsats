@@ -7,8 +7,13 @@
 #' @param path the path to the folder containing the desired file
 #' @param file the path of the desired file
 #' @param timezone the Olsen Named time zone, default is "America/Los_Angeles"
-#' @return A dataframe converting the raw detection data into rows of detections
+#' @returns A dataframe converting the raw detection data into rows of detections
 #' @export
+#' @examples
+#' # Read in an ATS file
+#' read_ats(path = "inst/extdata", file = "17111___210531_115356.csv",
+#' timezone = "America/Los_Angeles")
+#' # Warnings are expected due to the formatting of ATS files
 read_ats <- function(path, file, timezone="America/Los_Angeles"){
   ATS <- data.frame(read.delim(file = file.path(path,file),
                                skip = 0))
@@ -53,9 +58,3 @@ read_ats <- function(path, file, timezone="America/Los_Angeles"){
                        Thres)
   ATS
 }
-#' @examples
-#' # Read in an ATS file
-#' read_ats(path = "inst/extdata", file = "17111___210531_115356.csv",
-#' timezone = "America/Los_Angeles")
-#' # Warnings are expected due to the formatting of ATS files
-#'

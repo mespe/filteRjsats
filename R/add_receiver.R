@@ -8,16 +8,14 @@
 #'
 #' @param final_file a dataframe of detections retrieved from second_filter
 #' @param rcvr_data a dataframe of receiver metadata retrieved from get_rcvr_data
-#' @return A dataframe to which receiver metadata has been added.
+#' @returns A dataframe to which receiver metadata has been added.
 #' @export
+#' @examples
+#' # Join receiver metadata to detection data
+#' join_rcvr_data(fish_detects, cft_rcvrs)
 join_rcvr_data <- function(final_file, rcvr_data){
   out <- dplyr::left_join(final_file,rcvr_data,by = "ReceiverSN")
   out <- out[out$DateTime_Local > out$receiver_start &
                out$DateTime_Local < out$receiver_end,]
   out
 }
-#' @examples
-#'
-#' # Join receiver metadata to detection data
-#' join_rcvr_data(fish_detects, cft_rcvrs)
-#'

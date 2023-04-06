@@ -18,3 +18,9 @@ the add_fish() function and filters it a second time to remove any remaining
 multipath detections. Then depending on the type of receiver file applies an
 algorithm to assess and filter all remaining detections based on 2 or 4 hits.
 }
+\examples{
+# Apply a 2 or 4 hit filter based on the technology
+second_filter_2h4h(filter_fish_detects)
+# No detections are valid, 15 tags accounted for a total of 30 spurious detects
+
+}

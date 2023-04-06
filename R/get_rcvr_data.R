@@ -7,8 +7,14 @@
 #'
 #' @param fields a vector of important field names to be imported from the
 #' ERDDAP dataset
-#' @return A dataframe of receiver metadata which can be joined to detection data
+#' @returns A dataframe of receiver metadata which can be joined to detection data
 #' @export
+#' @examples
+#' # Retrieve the default variables from Cal Fish Track
+#' get_rcvr_data()
+#'
+#' # Retrieve all receiver metadata fields
+#' get_rcvr_data(fields = c(1:22))
 get_rcvr_data <- function(fields = rcvr_fields){
   rerddap::cache_delete_all()
   info <- rerddap::info('FED_JSATS_receivers',
@@ -71,11 +77,3 @@ get_rcvr_data <- function(fields = rcvr_fields){
     unique_receiver$receiver_general_location %in% c("SJ_HOR_DS","SJ_HOR_US") ~ "SR_Head_of_Old_River")
   data.frame(unique_receiver)
 }
-#' @examples
-#'
-#' # Retrieve the default variables from Cal Fish Track
-#' get_rcvr_data()
-#'
-#' # Retrieve all receiver metadata fields
-#' get_rcvr_data(fields = c(1:22))
-#'

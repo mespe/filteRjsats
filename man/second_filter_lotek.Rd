@@ -22,3 +22,9 @@ detections within the window occur within 20\% of the pulse rate interval of
 the other detections and that the standard deviation of pulse rate intervals
 is less than 0.025. Called by second_filter().
 }
+\examples{
+# Apply the Lotek filter to a prefiltered dataset with fish and tag
+# attributes
+second_filter_lotek(filter_fish_detects)
+# No detections are valid
+}

@@ -21,3 +21,9 @@ interval. It additionally checks that all detections have a frequency
 between 390 and 445 kHz and that the frequency of all detections are within
 55kHz of each other. Called by second_filter_2h4h().
 }
+\examples{
+# Apply the Teknologics filter to a prefiltered dataset with fish and tag
+# attributes
+second_filter_tekno(filter_fish_detects)
+# No detections are valid
+}
