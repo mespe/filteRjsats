@@ -21,4 +21,6 @@ algorithm to assess and filter all remaining detections based on 2 or 4 hits.
 \examples{
 # Apply a 2 or 4 hit filter based on the technology
 second_filter_2h4h(filter_fish_detects)
+# No detections are valid, 15 tags accounted for a total of 30 spurious detects
+
 }

@@ -25,5 +25,4 @@ between 390 and 445 kHz and that the frequency of all detections are within
 # Apply the Teknologics filter to a prefiltered dataset with fish and tag
 # attributes
 second_filter_tekno(filter_fish_detects)
-# No detections are valid
 }

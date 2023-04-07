@@ -7,7 +7,7 @@
 \format{
 \subsection{\code{raw_ats}}{
 
-a dataframe with 261,648 rows and 11 columns:
+a dataframe with 123,636 rows and 12 columns:
 \describe{
 \item{ReceiverSN}{the serial number of the acoustic receiver which heard the
 detection}

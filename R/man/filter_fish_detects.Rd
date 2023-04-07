@@ -7,7 +7,7 @@
 \format{
 \subsection{\code{filter_fish_detects}}{
 
-A dataframe with 5,000 rows and 39 columns
+A dataframe with 30 rows and 39 columns
 \describe{
 \item{ReceiverSN}{the serial number of the acoustic receiver which heard the
 detection}

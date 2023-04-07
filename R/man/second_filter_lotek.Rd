@@ -26,4 +26,5 @@ is less than 0.025. Called by second_filter().
 # Apply the Lotek filter to a prefiltered dataset with fish and tag
 # attributes
 second_filter_lotek(filter_fish_detects)
+# No detections are valid
 }

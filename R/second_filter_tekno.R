@@ -16,7 +16,6 @@
 #' # Apply the Teknologics filter to a prefiltered dataset with fish and tag
 #' # attributes
 #' second_filter_tekno(filter_fish_detects)
-#' # No detections are valid
 second_filter_tekno <- function(fish_file){
   filtered <- fish_file
   filtered$pr_nom <- as.numeric(filtered$tag_pulse_rate_interval_nominal)

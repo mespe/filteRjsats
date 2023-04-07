@@ -16,7 +16,6 @@
 #' # Apply the Lotek filter to a prefiltered dataset with fish and tag
 #' # attributes
 #' second_filter_lotek(filter_fish_detects)
-#' # No detections are valid
 second_filter_lotek <- function(fish_file){
   filtered <- fish_file
   filtered <- dplyr::group_by(.data = filtered, Tag_Hex)

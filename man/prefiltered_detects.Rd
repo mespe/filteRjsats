@@ -7,7 +7,7 @@
 \format{
 \subsection{\code{prefiltered_detects}}{
 
-A dataframe with 374 rows and 12 columns
+A dataframe with 209,149 rows and 12 columns
 \describe{
 \item{ReceiverSN}{the serial number of the acoustic receiver which heard the
 detection}

@@ -3,7 +3,7 @@
 #' A dataframe of ATS acoustic receiver data processed by `read_jsats()`
 #'
 #' @format ## `raw_ats`
-#' a dataframe with 123,636 rows and 12 columns:
+#' a dataframe with 261,648 rows and 11 columns:
 #' \describe{
 #'   \item{ReceiverSN}{the serial number of the acoustic receiver which heard the
 #'    detection}
@@ -117,7 +117,7 @@
 #' A dataframe of detections which has gone through the `prefilter()` function
 #'
 #' @format ## `prefiltered_detects`
-#' A dataframe with 374 rows and 12 columns
+#' A dataframe with 209,149 rows and 12 columns
 #' \describe{
 #'   \item{ReceiverSN}{the serial number of the acoustic receiver which heard the
 #'    detection}
@@ -160,7 +160,7 @@
 #' processed using the `prefilter()` and `add_fish()` functions.
 #'
 #' @format ## `filter_fish_detects`
-#' A dataframe with 30 rows and 39 columns
+#' A dataframe with 5,000 rows and 39 columns
 #' \describe{
 #'   \item{ReceiverSN}{the serial number of the acoustic receiver which heard the
 #'    detection}
