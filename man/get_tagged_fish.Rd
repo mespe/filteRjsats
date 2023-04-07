@@ -20,10 +20,8 @@ certain fields. This data is used to add fish data to detection data in the
 add_fish function.
 }
 \examples{
-# Retrieve all fields from CalFishTrack tagged fish table
-calfish <- get_tagged_fish()
-
 # Retrieve only a few important fields (fish type, tag code, release date)
 fields <- c(7,8,16)
 cal_fish_lite <- get_tagged_fish(important_fields = fields)
+
 }

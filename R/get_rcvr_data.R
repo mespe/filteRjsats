@@ -10,11 +10,8 @@
 #' @returns A dataframe of receiver metadata which can be joined to detection data
 #' @export
 #' @examples
-#' # Retrieve the default variables from Cal Fish Track
+#' # Retrieve the default set of fields from Cal Fish Track needed for package
 #' get_rcvr_data()
-#'
-#' # Retrieve all receiver metadata fields
-#' get_rcvr_data(fields = c(1:22))
 get_rcvr_data <- function(fields = rcvr_fields){
   rerddap::cache_delete_all()
   info <- rerddap::info('FED_JSATS_receivers',

@@ -10,12 +10,10 @@
 #' @returns A dataframe of fish data which can be joined to detection data
 #' @export
 #' @examples
-#' # Retrieve all fields from CalFishTrack tagged fish table
-#' calfish <- get_tagged_fish()
+#'# Retrieve only a few important fields (fish type, tag code, release date)
+#'fields <- c(7,8,16)
+#'cal_fish_lite <- get_tagged_fish(important_fields = fields)
 #'
-#' # Retrieve only a few important fields (fish type, tag code, release date)
-#' fields <- c(7,8,16)
-#' cal_fish_lite <- get_tagged_fish(important_fields = fields)
 get_tagged_fish <- function(important_fields = NULL){
   rerddap::cache_delete_all()
   info <- rerddap::info('FED_JSATS_taggedfish',
