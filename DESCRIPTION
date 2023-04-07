@@ -31,4 +31,5 @@ Suggests:
 Depends: 
     R (>= 4.1)
 LazyData: true
+LazyDataCompression: xz
 VignetteBuilder: knitr

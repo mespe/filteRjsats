@@ -24,5 +24,5 @@ dataframe.
 }
 \examples{
 # Compare detections before and after filtering
-compare_detects(raw_ats, filter_fish_detects)
+compare_detects(raw_ats[1:1000,], filter_fish_detects[1:1000,])
 }

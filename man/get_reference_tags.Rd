@@ -16,6 +16,8 @@ beacon tags from tagged fish.
 }
 \examples{
 # Download reference tags from CalFishTrack
-ref_tags <- get_reference_tags()
-head(ref_tags)
+tout <- getOption("timeout")
+options(timeout = 4)
+try(ref_tags <- get_reference_tags())
+options(timeout = tout)
 }

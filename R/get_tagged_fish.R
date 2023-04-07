@@ -11,9 +11,11 @@
 #' @export
 #' @examples
 #'# Retrieve only a few important fields (fish type, tag code, release date)
+#'tout <- getOption("timeout")
+#'options(timeout = 4)
 #'fields <- c(7,8,16)
-#'cal_fish_lite <- get_tagged_fish(important_fields = fields)
-#'
+#'try(cal_fish_lite <- get_tagged_fish(important_fields = fields))
+#'options(timeout = tout)
 get_tagged_fish <- function(important_fields = NULL){
   rerddap::cache_delete_all()
   info <- rerddap::info('FED_JSATS_taggedfish',

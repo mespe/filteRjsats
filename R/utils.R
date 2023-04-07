@@ -13,7 +13,7 @@
 #' @export
 #' @examples
 #' # Compare detections before and after filtering
-#' compare_detects(raw_ats, filter_fish_detects)
+#' compare_detects(raw_ats[1:1000,], filter_fish_detects[1:1000,])
 compare_detects  <- function(a1,a2){
   a3 <- dplyr::select(a1, Tag_Hex, DateTime_Local)
   a4 <- dplyr::select(a2, Tag_Hex, DateTime_Local)

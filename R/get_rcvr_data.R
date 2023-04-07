@@ -11,7 +11,10 @@
 #' @export
 #' @examples
 #' # Retrieve the default set of fields from Cal Fish Track needed for package
-#' get_rcvr_data()
+#' tout <- getOption("timeout")
+#' options(timeout = 4)
+#' try(get_rcvr_data())
+#' options(timeout = tout)
 get_rcvr_data <- function(fields = rcvr_fields){
   rerddap::cache_delete_all()
   info <- rerddap::info('FED_JSATS_receivers',

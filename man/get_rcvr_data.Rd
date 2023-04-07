@@ -21,5 +21,8 @@ receiver metadata to detection data in the add_fish function.
 }
 \examples{
 # Retrieve the default set of fields from Cal Fish Track needed for package
-get_rcvr_data()
+tout <- getOption("timeout")
+options(timeout = 4)
+try(get_rcvr_data())
+options(timeout = tout)
 }
