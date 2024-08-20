@@ -8,15 +8,27 @@
 #' dataframes are standardized so that all detection dataframes from any
 #' technology type are identical and superfluous fields are removed.
 #'
-#' @param jsats_file A dataframe which is the output from read_jstats() or
-#' format_detects()
-#' @param reference_tags A vector of potential reference (beacon) tag IDs
-#' @returns A standardized detection dataframe with multipath detects removed
+#' @param jsats_file A dataframe which is the output from
+#'   read_jstats() or format_detects()
+#' @param reference_tags A vector of potential reference (beacon) tag
+#'   IDs
+#' @param multipath_threshold numeric, the minimum time between
+#'   detections, below which the detections are considered multipath
+#'   detections
+#' @param ref_MBP_threshold numeric, the threshold for flagging
+#'   spurious signals for "reference" or beacon tags
+#' @param MBP_threshold numeric, the threshold for flagging spurious
+#'   signals for fish tags
+#' @returns A standardized detection dataframe with multipath detects
+#'   removed
 #' @export
 #' @examples
 #' # Filter a raw detection dataset
 #' prefilter(raw_ats, reftags)
-prefilter <- function(jsats_file, reference_tags){
+prefilter <- function(jsats_file, reference_tags,
+                      multipath_threshold = 0.3,
+                      ref_MBP_threshold = 3 * 64,
+                      MBP_threshold = 12 * 10){
   temp <- jsats_file
   temp <- dplyr::arrange(.data = temp,Tag_Hex)
   temp <- dplyr::group_by(.data = temp, Tag_Hex)
@@ -26,7 +38,7 @@ prefilter <- function(jsats_file, reference_tags){
   temp <- temp[temp$det_count > 1,]
   temp$time_diff_lag = difftime(temp$DateTime_Local, dplyr::lag(temp$DateTime_Local),
                                 units = "secs")
-  temp$multipath = ifelse(temp$time_diff_lag > lubridate::seconds(0.3)|
+  temp$multipath = ifelse(temp$time_diff_lag > lubridate::seconds(multipath_threshold)|
                             temp$Tag_Hex != dplyr::lag(temp$Tag_Hex), FALSE, TRUE)
   temp$multipath = ifelse(is.na(temp$time_diff_lag) &
                             dplyr::lead(temp$multipath) == FALSE,
@@ -40,15 +52,15 @@ prefilter <- function(jsats_file, reference_tags){
   temp$time_diff_lag = ifelse(temp$Tag_Hex != dplyr::lag(temp$Tag_Hex),NA,temp$time_diff_lag)
   temp$RefTag = ifelse(temp$Tag_Decimal %in% reference_tags, TRUE, FALSE) #Is it a ref tag?
   temp$CheckMBP = ifelse(temp$RefTag == TRUE, # If a ref tag,
-                         (temp$time_diff_lag < lubridate::seconds(3*64)), # 2 hits in 3*Max PRI
-                         (temp$time_diff_lag < lubridate::seconds(12*10))) # 2 hits in 12*Max PRI
+                         (temp$time_diff_lag < lubridate::seconds(ref_MBP_threshold)), # 2 hits in 3*Max PRI
+                         (temp$time_diff_lag < lubridate::seconds(MBP_threshold))) # 2 hits in 12*Max PRI
   temp$CheckMBP = ifelse(is.na(temp$time_diff_lag) & dplyr::lead(temp$CheckMBP) == FALSE, #First Detection is FALSE if 2nd is FALSE
                          FALSE,
                          ifelse(is.na(temp$time_diff_lag),
                                 TRUE,
                                 temp$CheckMBP)) #Otherwise it's valid
   temp$CheckMBP = ifelse(temp$CheckMBP == FALSE & !is.na(dplyr::lead(temp$time_diff_lag)) &
-                           dplyr::lead(temp$time_diff_lag) < lubridate::seconds(12*10), #If invalid based on last detection, but following detection is <120s
+                           dplyr::lead(temp$time_diff_lag) < lubridate::seconds(MBP_threshold), #If invalid based on last detection, but following detection is <120s
                          TRUE, #Valid
                          temp$CheckMBP) #Return Previous Assignment
   temp <- temp[temp$CheckMBP == TRUE,]
