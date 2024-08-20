@@ -14,11 +14,12 @@
 #'   IDs
 #' @param multipath_threshold numeric, the minimum time between
 #'   detections, below which the detections are considered multipath
-#'   detections
+#'   detections. Defaults to 0.3 seconds.
 #' @param ref_MBP_threshold numeric, the threshold for flagging
-#'   spurious signals for "reference" or beacon tags
+#'   spurious signals for "reference" or beacon tags. By default, this
+#'   is set to 3 * Max PRI.
 #' @param MBP_threshold numeric, the threshold for flagging spurious
-#'   signals for fish tags
+#'   signals for fish tags. By default this is set to 12 * Max PRI
 #' @returns A standardized detection dataframe with multipath detects
 #'   removed
 #' @export
@@ -52,8 +53,8 @@ prefilter <- function(jsats_file, reference_tags,
   temp$time_diff_lag = ifelse(temp$Tag_Hex != dplyr::lag(temp$Tag_Hex),NA,temp$time_diff_lag)
   temp$RefTag = ifelse(temp$Tag_Decimal %in% reference_tags, TRUE, FALSE) #Is it a ref tag?
   temp$CheckMBP = ifelse(temp$RefTag == TRUE, # If a ref tag,
-                         (temp$time_diff_lag < lubridate::seconds(ref_MBP_threshold)), # 2 hits in 3*Max PRI
-                         (temp$time_diff_lag < lubridate::seconds(MBP_threshold))) # 2 hits in 12*Max PRI
+                         (temp$time_diff_lag < lubridate::seconds(ref_MBP_threshold)), 
+                         (temp$time_diff_lag < lubridate::seconds(MBP_threshold)))
   temp$CheckMBP = ifelse(is.na(temp$time_diff_lag) & dplyr::lead(temp$CheckMBP) == FALSE, #First Detection is FALSE if 2nd is FALSE
                          FALSE,
                          ifelse(is.na(temp$time_diff_lag),
